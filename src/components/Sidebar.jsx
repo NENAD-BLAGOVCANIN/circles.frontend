@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompass, faUsers, faAddressBook, faListCheck, faUser, faRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/img/logo.png';
@@ -16,9 +16,6 @@ function Sidebar() {
         <nav id="sidebar" className={sidebarActive ? 'active' : ''}>
             <div className="px-3">
                 <img src={logo} alt="" />
-                <div className='card w-fit position-fixed' id='toggleModalButton' onClick={toggleModal}>
-                    <FontAwesomeIcon icon={faBars} />
-                </div>
             </div>
 
             <ul className="list-unstyled py-4">
@@ -56,6 +53,10 @@ function Sidebar() {
                     </a>
                 </li>
             </ul>
+
+            <div className='card w-fit position-fixed pointer' id='toggleModalButton' onClick={toggleModal}>
+                <FontAwesomeIcon icon={faBars} />
+            </div>
 
         </nav>
     )
