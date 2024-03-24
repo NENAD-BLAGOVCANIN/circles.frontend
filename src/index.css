@@ -2,7 +2,7 @@
   --color-primary: #042b47;
   --color-text: #393646;
   --color-secondary: #807BA0;
-  --color-background: #EBEAF6;
+  --color-background: #fff;
   --color-dark: #393646;
   --color-danger: #cf004c;
   --color-gray: #EBEAF6;
@@ -24,26 +24,10 @@ body {
 }
 
 .main-content-wrapper {
-  padding-bottom: 1.5rem;
-  padding-left: var(--sidebar-width);
+  padding: 1.5rem;
+  background-color: white;
   min-height: 100vh;
   width: 100%;
-  padding-right: 27rem;
-  min-width: 1060px;
-}
-
-#rightToolbar {
-  position: absolute;
-  right: 0;
-  background-color: #FCF6F7;
-  width: 27rem !important;
-}
-
-.sidebar {
-  overflow: auto;
-  position: fixed;
-  width: var(--sidebar-width);
-  height: 100%;
 }
 
 #sidebar-logo {
@@ -126,4 +110,37 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #a1a1a1;
   border-radius: 2rem
+}
+
+
+
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+  background-color: var(--color-gray);
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+}
+
+#sidebar ul p {
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
 }
