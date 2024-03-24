@@ -1,13 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCompass, faUsers, faAddressBook, faListCheck, faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faCompass, faUsers, faAddressBook, faListCheck, faUser, faRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
+import logo from '../assets/img/logo.png';
 
 function Sidebar() {
+
+    const [sidebarActive, setSidebarActive] = useState(false);
+
+    const toggleModal = () => {
+        setSidebarActive(!sidebarActive);
+    };
+
     return (
 
-        <nav id="sidebar">
-            <div className="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
+        <nav id="sidebar" className={sidebarActive ? 'active' : ''}>
+            <div className="px-3">
+                <img src={logo} alt="" />
+                <div className='card w-fit position-fixed' id='toggleModalButton' onClick={toggleModal}>
+                    <FontAwesomeIcon icon={faBars} />
+                </div>
             </div>
 
             <ul className="list-unstyled py-4">
