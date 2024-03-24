@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faCompass, faUsers, faAddressBook, faListCheck, faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
     return (
@@ -8,54 +10,42 @@ function Sidebar() {
                 <h3>Bootstrap Sidebar</h3>
             </div>
 
-            <ul className="list-unstyled components">
-                <li className="active">
-                    <a href="#homeSubmenu" data-bs-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Home</a>
-                    <ul className="collapse list-unstyled" id="homeSubmenu">
-                        <li className='nav-item'>
-                            <a href="#" className='nav-link'>Home 1</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a href="#" className='nav-link'>Home 2</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a href="#" className='nav-link'>Home 3</a>
-                        </li>
-                    </ul>
+            <ul className="list-unstyled py-4">
+                <li className='nav-item'>
+                    <a href="#" className='nav-link'>
+                        <FontAwesomeIcon icon={faCompass} />
+                        <span className='ps-3'>Dashboard</span>
+                    </a>
                 </li>
                 <li className='nav-item'>
-                    <a href="#" className='nav-link'>About</a>
+                    <a href="#" className='nav-link'>
+                        <FontAwesomeIcon icon={faUsers} />
+                        <span className='ps-3'>Team</span>
+                    </a>
                 </li>
                 <li className='nav-item'>
-                    <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Pages</a>
-                    <ul className="collapse list-unstyled" id="pageSubmenu">
-                        <li className='nav-item'>
-                            <a href="#" className='nav-link'>Page 1</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a href="#" className='nav-link'>Page 2</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a href="#" className='nav-link'>Page 3</a>
-                        </li>
-                    </ul>
+                    <a href="#" className='nav-link'>
+                        <FontAwesomeIcon icon={faAddressBook} />
+                        <span className='ps-3'>Contacts</span>
+                    </a>
                 </li>
                 <li className='nav-item'>
-                    <a href="#" className='nav-link'>Portfolio</a>
+                    <a href="#" className='nav-link'>
+                        <FontAwesomeIcon icon={faListCheck} />
+                        <span className='ps-3'>Tasks</span>
+                    </a>
                 </li>
+
+                <hr />
+
                 <li className='nav-item'>
-                    <a href="#" className='nav-link'>Contact</a>
+                    <a href="#" className='nav-link'>
+                        <FontAwesomeIcon icon={faRightFromBracket} />
+                        <span className='ps-3'>Logout</span>
+                    </a>
                 </li>
             </ul>
 
-            <ul className="list-unstyled CTAs">
-                <li className='nav-item'>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" className="download">Download source</a>
-                </li>
-                <li className='nav-item'>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" className="article">Back to article</a>
-                </li>
-            </ul>
         </nav>
     )
 }
