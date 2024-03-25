@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass, faUsers, faAddressBook, faListCheck, faUserTie, faRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCompass, faAddressBook, faUser, faListCheck, faUserTie, faRightFromBracket, faBars, faChevronUp, faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/img/logo.png';
 
 function Sidebar() {
@@ -20,8 +20,20 @@ function Sidebar() {
 
         <nav id="sidebar" className={sidebarActive ? 'active' : ''}>
 
-            <div className="px-3">
-                <img src={logo} alt="" style={{ maxWidth: 55, width: '100%' }} />
+            <div className="nav-item rounded card px-2">
+                <div className='d-flex align-items-center justify-content-around'>
+                    <div className='p-2 rounded bg-black'>
+                        <FontAwesomeIcon icon={faUser} className='text-white px-1' />
+                    </div>
+                    <span className='px-2'>
+                        Nenad's workspace
+                    </span>
+                    <div className='p-2 d-flex flex-column align-items-center justify-content-center'>
+                        <FontAwesomeIcon icon={faChevronUp} className='text-muted small' />
+                        <FontAwesomeIcon icon={faChevronDown} className='text-muted small' />
+                    </div>
+                </div>
+
             </div>
 
             <ul className="list-unstyled py-4">
@@ -47,6 +59,12 @@ function Sidebar() {
                     <a href="/tasks" className='nav-link' onClick={() => handlePageChange('/tasks')}>
                         <FontAwesomeIcon icon={faListCheck} />
                         <span className='ps-3'>Tasks</span>
+                    </a>
+                </li>
+                <li className={`nav-item px-2 rounded ${currentPage === '/settings' ? 'active' : ''}`}>
+                    <a href="/settings" className='nav-link' onClick={() => handlePageChange('/settings')}>
+                        <FontAwesomeIcon icon={faGear} />
+                        <span className='ps-3'>Settings</span>
                     </a>
                 </li>
 

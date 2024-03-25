@@ -8,6 +8,7 @@ import Tasks from './pages/Tasks';
 import Logout from './pages/Logout';
 import Contacts from './pages/Contacts';
 import Leads from './pages/Leads';
+import Settings from './pages/Settings';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -35,6 +36,7 @@ function App() {
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/leads" element={<Leads />} />
+        <Route path="/settings" element={<Settings />} />
 
         {/* Auth */}
         <Route path="/login" element={<Login />} />
