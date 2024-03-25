@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass, faUsers, faAddressBook, faListCheck, faUser, faRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCompass, faUsers, faAddressBook, faListCheck, faUserTie, faRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/img/logo.png';
 
 function Sidebar() {
@@ -31,16 +31,16 @@ function Sidebar() {
                         <span className='ps-3'>Dashboard</span>
                     </a>
                 </li>
-                <li className={`nav-item px-2 rounded ${currentPage === '/team' ? 'active' : ''}`}>
-                    <a href="/team" className='nav-link' onClick={() => handlePageChange('/team')}>
-                        <FontAwesomeIcon icon={faUsers} />
-                        <span className='ps-3'>Team</span>
-                    </a>
-                </li>
                 <li className={`nav-item px-2 rounded ${currentPage === '/contacts' ? 'active' : ''}`}>
                     <a href="/contacts" className='nav-link' onClick={() => handlePageChange('/contacts')}>
                         <FontAwesomeIcon icon={faAddressBook} />
                         <span className='ps-3'>Contacts</span>
+                    </a>
+                </li>
+                <li className={`nav-item px-2 rounded ${currentPage === '/leads' ? 'active' : ''}`}>
+                    <a href="/leads" className='nav-link' onClick={() => handlePageChange('/leads')}>
+                        <FontAwesomeIcon icon={faUserTie} />
+                        <span className='ps-3'>Leads</span>
                     </a>
                 </li>
                 <li className={`nav-item px-2 rounded ${currentPage === '/tasks' ? 'active' : ''}`}>
