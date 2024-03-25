@@ -15,7 +15,7 @@ function Sidebar() {
 
         <nav id="sidebar" className={sidebarActive ? 'active' : ''}>
             <div className="px-3">
-                <img src={logo} alt="" />
+                <img src={logo} alt="" style={{ maxWidth: 55, width: '100%' }} />
             </div>
 
             <ul className="list-unstyled py-4">
