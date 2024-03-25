@@ -3,6 +3,8 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
 function Contacts() {
 
@@ -29,6 +31,14 @@ function Contacts() {
         { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
     ];
 
+    const options = {
+        paginationSize: 5,
+        pageStartIndex: 1,
+        sizePerPage: 5,
+        hideSizePerPage: true,
+        hidePageListOnlyOnePage: true
+    };
+
     return (
         <div className='d-flex position-relative'>
 
@@ -46,6 +56,7 @@ function Contacts() {
                         columns={columns}
                         classes='table-striped table-hover'
                         filter={filterFactory()}
+                        pagination={paginationFactory(options)}
                     />
 
                 </div>
