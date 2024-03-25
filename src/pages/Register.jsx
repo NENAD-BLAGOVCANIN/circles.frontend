@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../assets/img/logo.png'
-import { login } from '../api/login';
+import { register } from '../api/register';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -16,11 +16,11 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const { success, message } = await login(email, password);
+      const { success, message } = await register(name, email, password);
       if (success) {
         navigate('/');
       } else {
-        setError(message || 'Login failed. Please check your credentials.');
+        setError(message || 'Registration failed. Please check your credentials.');
       }
     } catch (error) {
       setError('An error occurred while logging in.');
@@ -51,7 +51,7 @@ export default function Register() {
           <div className='py-2'>
             <input type="text" name='name' value={name} onChange={(e) => setName(e.target.value)} className='form-control py-3 border-0' style={{ backgroundColor: '#EBE9F9' }} placeholder='Your Name' />
           </div>
-          <div className='py-2'>
+          <div className='py-2'> 
             <input type="text" name='email' value={email} onChange={(e) => setEmail(e.target.value)} className='form-control py-3 border-0' style={{ backgroundColor: '#EBE9F9' }} placeholder='Your email address' />
           </div>
           <div className='py-2'>

@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import { isLoggedIn } from './utils/auth';
 import Tasks from './pages/Tasks';
 import Logout from './pages/Logout';
+import Contacts from './pages/Contacts';
+import Leads from './pages/Leads';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -30,10 +32,15 @@ function App() {
       <Routes>
         <Route path="/" element={authenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/leads" element={<Leads />} />
+
+        {/* Auth */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/tasks" element={<Tasks />} />
         <Route path="/logout" element={<Logout />} />
+
 
       </Routes>
     </Router>
