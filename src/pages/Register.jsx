@@ -58,7 +58,7 @@ export default function Register() {
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name='password' className='form-control py-3 border-0' style={{ backgroundColor: '#EBE9F9' }} placeholder='Your password' />
           </div>
           <div className='py-2'>
-            <button type="submit" className='btn btn-primary w-100 py-3 border-0 fw-500' style={{ backgroundColor: '#EBE9F9' }}>Login</button>
+            <button type="submit" className='btn btn-primary w-100 py-3 border-0 fw-500' style={{ backgroundColor: '#EBE9F9' }}>Sign Up</button>
           </div>
 
           <div className='d-flex justify-content-between py-2'>
@@ -68,7 +68,6 @@ export default function Register() {
                 Remember Me
               </label>
             </div>
-            <a href="" className='text-primary'>Trouble logging in?</a>
           </div>
 
           <div className='d-flex justify-content-center py-4'>
