@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #042b47;
+  --color-primary: #0059be;
   --color-text: #393646;
   --color-secondary: #807BA0;
   --color-background: #fff;
@@ -121,7 +121,10 @@ hr{
   min-height: 100vh;
   background-color: var(--color-gray);
   transition: all 0.3s;
-  padding: 1.3rem;
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border-right: 2px solid var(--color-dark-gray) !important
 }
 
@@ -139,10 +142,15 @@ hr{
   padding-bottom: .5rem;
 }
 
-#sidebar .nav-item .nav-link.active,
-#sidebar .nav-item .nav-link:hover {
-  background-color: unset !important;
+#sidebar .nav-item.active, #sidebar .nav-item.active .nav-link,
+#sidebar .nav-item:hover, #sidebar .nav-item:hover .nav-link {
   color: var(--color-primary) !important;
+}
+
+#sidebar .nav-item:hover, #sidebar .nav-item:hover,
+#sidebar .nav-item.active, #sidebar .nav-item.active{
+  background-color: white !important;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .card {

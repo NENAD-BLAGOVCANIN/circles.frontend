@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { isLoggedIn } from './utils/auth';
+import Tasks from './pages/Tasks';
+import Logout from './pages/Logout';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -30,6 +32,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/logout" element={<Logout />} />
+
       </Routes>
     </Router>
   );
