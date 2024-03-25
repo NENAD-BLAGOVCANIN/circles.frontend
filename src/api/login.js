@@ -11,11 +11,10 @@ const login = async (email, password) => {
         const response = await fetch(apiUrl+'/auth/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
-            body: JSON.stringify({
-                variables
-            })
+            body: JSON.stringify(variables)
         });
 
         const responseData = await response.json();

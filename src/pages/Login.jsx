@@ -16,9 +16,9 @@ export default function Login() {
 
         try {
             const { success, message } = await login(email, password);
-            console.log('Login Success:', success);
             if (success) {
-                navigate('/select-store');
+                // navigate('/select-store');
+                console.log("asasd");
             } else {
                 setError(message || 'Login failed. Please check your credentials.');
             }
