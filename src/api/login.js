@@ -19,9 +19,8 @@ const login = async (email, password) => {
 
         const responseData = await response.json();
 
-        if (response.ok && responseData.data.tokenAuth.token) {
+        if (response.ok) {
             localStorage.setItem('accessToken', responseData.authorisation.token);
-            console.log(localStorage.getItem('accessToken'));
             return { success: true, message: "Login successful" };
         } else {
             throw new Error(responseData.errors);
