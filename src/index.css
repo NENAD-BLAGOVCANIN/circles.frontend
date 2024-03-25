@@ -170,3 +170,8 @@ hr{
   transform: translateX(-50%);
   bottom: 3rem;
 }
+
+.auth-page-logo{
+  max-width: 105px;
+  width: 100%;
+}

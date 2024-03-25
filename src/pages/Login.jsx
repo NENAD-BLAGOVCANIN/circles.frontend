@@ -32,16 +32,13 @@ export default function Login() {
     return (
         <div className='main-auth-page-container'>
 
-            <div className="bg-white px-4 py-5 w-100" style={{ maxWidth: 520 }}>
+            <div className="card bg-white px-5 py-5 w-100" style={{ maxWidth: 540 }}>
 
                 <div className='text-center'>
                     <div className='py-3'>
-                        <img src={logo} alt="" />
+                        <img src={logo} alt="" className='auth-page-logo' />
                     </div>
 
-                    <div className='py-3 text-center'>
-                        <span style={{ fontSize: '18pt' }}>Loyalty<b>dish</b></span>
-                    </div>
                     <div className='py-3'>
                         <span style={{ fontSize: '18pt' }} className='py-3 text-secondary'>Welcome Back!</span>
                     </div>
@@ -72,7 +69,7 @@ export default function Login() {
                     </div>
 
                     <div className='d-flex justify-content-center py-4'>
-                        <span className='px-1 text-secondary'>New to Loyaltydish?</span>
+                        <span className='px-1 text-secondary'>New to Circles?</span>
                         <a href="/register" className='px-1 text-primary'>Sign Up</a>
                     </div>
 
