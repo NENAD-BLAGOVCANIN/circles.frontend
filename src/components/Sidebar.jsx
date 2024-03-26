@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompass, faAddressBook, faUser, faListCheck, faUserTie, faRightFromBracket, faBars, faChevronUp, faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons';
-import logo from '../assets/img/logo.png';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
 
@@ -38,43 +38,43 @@ function Sidebar() {
 
             <ul className="list-unstyled py-4">
                 <li className={`nav-item px-2 rounded ${currentPage === '/dashboard' ? 'active' : ''}`}>
-                    <a href="/dashboard" className='nav-link' onClick={() => handlePageChange('/dashboard')}>
+                    <Link to="/dashboard" className='nav-link' onClick={() => handlePageChange('/dashboard')}>
                         <FontAwesomeIcon icon={faCompass} />
                         <span className='ps-3'>Dashboard</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className={`nav-item px-2 rounded ${currentPage === '/contacts' ? 'active' : ''}`}>
-                    <a href="/contacts" className='nav-link' onClick={() => handlePageChange('/contacts')}>
+                    <Link to="/contacts" className='nav-link' onClick={() => handlePageChange('/contacts')}>
                         <FontAwesomeIcon icon={faAddressBook} />
                         <span className='ps-3'>Contacts</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className={`nav-item px-2 rounded ${currentPage === '/leads' ? 'active' : ''}`}>
-                    <a href="/leads" className='nav-link' onClick={() => handlePageChange('/leads')}>
+                    <Link to="/leads" className='nav-link' onClick={() => handlePageChange('/leads')}>
                         <FontAwesomeIcon icon={faUserTie} />
                         <span className='ps-3'>Leads</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className={`nav-item px-2 rounded ${currentPage === '/tasks' ? 'active' : ''}`}>
-                    <a href="/tasks" className='nav-link' onClick={() => handlePageChange('/tasks')}>
+                    <Link to="/tasks" className='nav-link' onClick={() => handlePageChange('/tasks')}>
                         <FontAwesomeIcon icon={faListCheck} />
                         <span className='ps-3'>Tasks</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className={`nav-item px-2 rounded ${currentPage === '/settings' ? 'active' : ''}`}>
-                    <a href="/settings" className='nav-link' onClick={() => handlePageChange('/settings')}>
+                    <Link to="/settings" className='nav-link' onClick={() => handlePageChange('/settings')}>
                         <FontAwesomeIcon icon={faGear} />
                         <span className='ps-3'>Settings</span>
-                    </a>
+                    </Link>
                 </li>
 
                 <hr />
 
                 <li className='nav-item px-2 rounded'>
-                    <a href="/logout" className='nav-link'>
+                    <Link to="/logout" className='nav-link'>
                         <FontAwesomeIcon icon={faRightFromBracket} />
                         <span className='ps-3'>Logout</span>
-                    </a>
+                    </Link>
                 </li>
             </ul>
 
