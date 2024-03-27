@@ -8,10 +8,12 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getContacts } from '../api/contacts';
+import AddContactModal from '../components/AddContactModal';
 
 function Contacts() {
 
     const [contacts, setContacts] = useState([]);
+    const [showAddContactsModal, setShowAddContactsModal] = useState(false);
 
     useEffect(() => {
         const fetchContacts = async () => {
@@ -26,7 +28,12 @@ function Contacts() {
         fetchContacts();
     }, []);
 
+    const openAddContactModal = () => {
+        setShowAddContactsModal(true);
+    };
+
     const columns = [
+        { dataField: 'id', text: 'ID', filter: textFilter() },
         { dataField: 'name', text: 'Name', filter: textFilter() },
         { dataField: 'email', text: 'Email', filter: textFilter() },
         { dataField: 'title', text: 'Title', filter: textFilter() },
@@ -41,6 +48,7 @@ function Contacts() {
     ];
 
     const data = contacts.map(contact => ({
+        id: contact.id,
         name: contact.name,
         email: contact.email,
         title: contact.title,
@@ -74,12 +82,12 @@ function Contacts() {
                 <div className='main-content-wrapper'>
 
                     <div className='d-flex justify-content-center pt-3 pb-4'>
-                        <button className='btn btn-basic card shadow-sm'><span className='text-primary'><FontAwesomeIcon icon={faPlus} className='pe-1' /> New Contact</span></button>
+                        <button className='btn btn-basic card shadow-sm' onClick={openAddContactModal}><span className='text-primary'><FontAwesomeIcon icon={faPlus} className='pe-1' /> New Contact</span></button>
                     </div>
 
-                    <div className='m-auto d-block w-100' style={{maxWidth: 1500, overflow: 'auto'}}>
+                    <div className='m-auto d-block w-100' style={{ maxWidth: 1500, overflow: 'auto' }}>
                         <BootstrapTable
-                            keyField='name'
+                            keyField='id'
                             data={data}
                             columns={columns}
                             classes='table-striped table-hover table-responsive'
@@ -92,8 +100,13 @@ function Contacts() {
                 </div>
             </div>
 
+            <AddContactModal setContacts={setContacts}
+                showAddContactsModal={showAddContactsModal}
+                setShowAddContactsModal={setShowAddContactsModal}
+            />
 
         </div>
+
     )
 }
 
