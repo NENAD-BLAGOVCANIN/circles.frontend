@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      const loggedIn = await isLoggedIn();
+      const loggedIn = isLoggedIn();
       setAuthenticated(loggedIn);
       setLoading(false);
     };
@@ -39,8 +39,8 @@ function App() {
         <Route path="/settings" element={<Settings />} />
 
         {/* Auth */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login authenticated={authenticated} setAuthenticated={setAuthenticated} />} />
+        <Route path="/register" element={<Register authenticated={authenticated} setAuthenticated={setAuthenticated} />} />
         <Route path="/logout" element={<Logout />} />
 
 

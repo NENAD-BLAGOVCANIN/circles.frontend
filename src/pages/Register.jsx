@@ -4,7 +4,7 @@ import { register } from '../api/register';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Register() {
+export default function Register({authenticated, setAuthenticated}) {
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -18,6 +18,7 @@ export default function Register() {
     try {
       const { success, message } = await register(name, email, password);
       if (success) {
+        setAuthenticated(true);
         navigate('/');
       } else {
         setError(message || 'Registration failed. Please check your credentials.');

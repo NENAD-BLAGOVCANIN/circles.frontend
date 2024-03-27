@@ -4,7 +4,7 @@ import { login } from '../api/login';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Login() {
+export default function Login({authenticated, setAuthenticated}) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,12 +17,13 @@ export default function Login() {
         try {
             const { success, message } = await login(email, password);
             if (success) {
+                setAuthenticated(true);
                 navigate('/');
             } else {
                 setError(message || 'Login failed. Please check your credentials.');
             }
         } catch (error) {
-            setError('An error occurred while logging in.');
+            setError('Wrong email or password');
             console.error(error);
         }
     };

@@ -33,18 +33,18 @@ function Contacts() {
     };
 
     const columns = [
-        { dataField: 'id', text: 'ID', filter: textFilter() },
+        { dataField: 'id', text: 'ID' },
         { dataField: 'name', text: 'Name', filter: textFilter() },
         { dataField: 'email', text: 'Email', filter: textFilter() },
-        { dataField: 'title', text: 'Title', filter: textFilter() },
-        { dataField: 'city', text: 'City', filter: textFilter() },
-        { dataField: 'address', text: 'Address', filter: textFilter() },
-        { dataField: 'description', text: 'Description', filter: textFilter() },
-        { dataField: 'lead_source', text: 'Lead Source', filter: textFilter() },
-        { dataField: 'past_client', text: 'Past Client', filter: textFilter() },
-        { dataField: 'phone', text: 'Phone', filter: textFilter() },
-        { dataField: 'organization', text: 'Organization', filter: textFilter() },
-        { dataField: 'created_at', text: 'Date Added', filter: textFilter() }
+        { dataField: 'title', text: 'Title' },
+        { dataField: 'city', text: 'City' },
+        { dataField: 'address', text: 'Address' },
+        { dataField: 'description', text: 'Description' },
+        { dataField: 'lead_source', text: 'Lead Source' },
+        { dataField: 'past_client', text: 'Past Client' },
+        { dataField: 'phone', text: 'Phone' },
+        { dataField: 'organization', text: 'Organization' },
+        { dataField: 'created_at', text: 'Date Added' }
     ];
 
     const data = contacts.map(contact => ({
