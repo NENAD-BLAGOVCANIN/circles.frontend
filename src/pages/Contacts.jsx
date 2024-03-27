@@ -100,7 +100,9 @@ function Contacts() {
                 </div>
             </div>
 
-            <AddContactModal setContacts={setContacts}
+            <AddContactModal 
+                contacts={contacts}
+                setContacts={setContacts}
                 showAddContactsModal={showAddContactsModal}
                 setShowAddContactsModal={setShowAddContactsModal}
             />
