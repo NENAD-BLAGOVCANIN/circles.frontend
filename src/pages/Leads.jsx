@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getLeads } from '../api/leads';
+import { deleteLead } from '../api/leads';
 
 function Leads() {
 
@@ -21,6 +22,16 @@ function Leads() {
 
         fetchLeads();
     }, []);
+
+    const handleDeleteLead = async (lead_id) => {
+        try {
+            await deleteLead(lead_id);
+            const updatedLeads = leads.filter(lead => lead.id !== lead_id);
+            setLeads(updatedLeads);
+        } catch (error) {
+            console.error('Error deleting lead:', error);
+        }
+    };
 
     return (
         <div className='main-content-wrapper'>
@@ -50,6 +61,7 @@ function Leads() {
                                         <th>Phone</th>
                                         <th>Organization</th>
                                         <th>Date Added</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,6 +79,13 @@ function Leads() {
                                             <td>{lead.contact.phone}</td>
                                             <td>{lead.contact.organization}</td>
                                             <td>{lead.contact.created_at}</td>
+                                            <td>
+                                                <div className="h-100 d-flex align-items-center justify-content-center">
+                                                    <button className='btn btn-basic bg-gray text-danger shadow-sm' onClick={() => handleDeleteLead(lead.id)}>
+                                                        <FontAwesomeIcon icon={faTrash} />
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

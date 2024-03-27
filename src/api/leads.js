@@ -53,4 +53,29 @@ const saveLead = async (lead) => {
 
 }
 
-export { getLeads, saveLead };
+const deleteLead = async (lead_id) => {
+
+    try {
+
+        const token = localStorage.getItem('accessToken'); 
+
+        const response = await fetch(apiUrl + '/leads/' + lead_id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+export { getLeads, saveLead, deleteLead };
