@@ -2,39 +2,9 @@ import React, {useState} from 'react'
 import { saveContact } from '../api/contacts';
 
 function ViewContactModal({contacts, setContacts, showViewContactModal, setShowViewContactModal, selectedContact, setSelectedContact}) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [title, setTitle] = useState('');
-    const [city, setCity] = useState('');
-    const [address, setAddress] = useState('');
-    const [organization, setOrganization] = useState('');
-    const [description, setDescription] = useState('');
-    const [pastClient, setPastClient] = useState(false);
-    const [errors, setErrors] = useState([]);
 
     const handleCloseAddContactsModal = () => {
         setShowViewContactModal(false);
-    };
-
-    const handleSubmit = async () => {
-        const contact = {
-            "name": name,
-            "email": email,
-            "title": title,
-            "city": city,
-            "address": address,
-            "organization": organization,
-            "description": description,
-            "pastClient": pastClient
-        };
-
-        try {
-            const newContact = await saveContact(contact);
-            setContacts([...contacts, newContact]);
-            setShowViewContactModal(false);
-        } catch (error) {
-            setErrors(error.message);
-        }
     };
 
     return (
@@ -51,30 +21,47 @@ function ViewContactModal({contacts, setContacts, showViewContactModal, setShowV
                             </span>
                         </div>
                         <div className='modal-body'>
-                            <div className='row'>
+
+                            <p className='text-muted'>
+                                {selectedContact.description}
+                            </p>
+
+                            <div className='row py-3'>
                                 <div className='col-md-6 p-2'>
-                                    <input type="text" className='form-control' placeholder='Name' value={name} onChange={(e) => setName(e.target.value)} />
+                                    <span className='fw-500'>Name: </span>
+                                    <span>
+                                        {selectedContact.name}
+                                    </span>
                                 </div>
                                 <div className='col-md-6 p-2'>
-                                    <input type="text" className='form-control' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    <span className='fw-500'>Email: </span>
+                                    <span>
+                                        {selectedContact.email}
+                                    </span>
                                 </div>
                                 <div className='col-md-6 p-2'>
-                                    <input type="text" className='form-control' placeholder='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
+                                    <span className='fw-500'>City: </span>
+                                    <span>
+                                        {selectedContact.city}
+                                    </span>
                                 </div>
                                 <div className='col-md-6 p-2'>
-                                    <input type="text" className='form-control' placeholder='City' value={city} onChange={(e) => setCity(e.target.value)} />
+                                    <span className='fw-500'>Address: </span>
+                                    <span>
+                                        {selectedContact.address}
+                                    </span>
                                 </div>
                                 <div className='col-md-6 p-2'>
-                                    <input type="text" className='form-control' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} />
+                                    <span className='fw-500'>Organization: </span>
+                                    <span>
+                                        {selectedContact.organization}
+                                    </span>
                                 </div>
                                 <div className='col-md-6 p-2'>
-                                    <input type="text" className='form-control' placeholder='Organization' value={organization} onChange={(e) => setOrganization(e.target.value)} />
-                                </div>
-                                <div className='col-md-12 p-2'>
-                                    <textarea type="text" className='form-control' placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
-                                </div>
-                                <div className='col-md-6 p-2'>
-                                    <input type="checkbox" className='form-check-input text-muted' checked={pastClient} onChange={(e) => setPastClient(e.target.checked)} /> <label className='form-check-label text-muted'>Past Client</label>
+                                    <span className='fw-500'>Past client: </span>
+                                    <span>
+                                        {selectedContact.pastClient ? selectedContact.pastClient : 'No'}
+                                    </span>
                                 </div>
 
                                 {errors && (
@@ -89,9 +76,6 @@ function ViewContactModal({contacts, setContacts, showViewContactModal, setShowV
                                 )}
 
                             </div>
-                        </div>
-                        <div className='modal-footer border-0'>
-                            <button className='btn btn-primary rounded' onClick={handleSubmit}>Save</button>
                         </div>
                     </div>
                 </div>
