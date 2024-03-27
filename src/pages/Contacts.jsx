@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -7,37 +7,52 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { getContacts } from '../api/contacts';
 
 function Contacts() {
 
+    const [contacts, setContacts] = useState([]);
+
+    useEffect(() => {
+        const fetchContacts = async () => {
+            try {
+                const fetchedContacts = await getContacts();
+                setContacts(fetchedContacts);
+            } catch (error) {
+                console.error('Error fetching contacts:', error);
+            }
+        };
+
+        fetchContacts();
+    }, []);
+
     const columns = [
         { dataField: 'name', text: 'Name', filter: textFilter() },
-        { dataField: 'position', text: 'Position', filter: textFilter() },
-        { dataField: 'office', text: 'Office', filter: textFilter() },
-        { dataField: 'age', text: 'Age', filter: textFilter() },
-        { dataField: 'start_date', text: 'Start Date', filter: textFilter() },
-        { dataField: 'salary', text: 'Salary', filter: textFilter() }
+        { dataField: 'email', text: 'Email', filter: textFilter() },
+        { dataField: 'title', text: 'Title', filter: textFilter() },
+        { dataField: 'city', text: 'City', filter: textFilter() },
+        { dataField: 'address', text: 'Address', filter: textFilter() },
+        { dataField: 'description', text: 'Description', filter: textFilter() },
+        { dataField: 'lead_source', text: 'Lead Source', filter: textFilter() },
+        { dataField: 'past_client', text: 'Past Client', filter: textFilter() },
+        { dataField: 'phone', text: 'Phone', filter: textFilter() },
+        { dataField: 'organization', text: 'Organization', filter: textFilter() },
+        { dataField: 'created_at', text: 'Date Added', filter: textFilter() }
     ];
 
-    const data = [
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-        { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '$320,800' },
-    ];
+    const data = contacts.map(contact => ({
+        name: contact.name,
+        email: contact.email,
+        title: contact.title,
+        city: contact.city,
+        address: contact.address,
+        description: contact.description,
+        lead_source: contact.lead_source,
+        past_client: contact.past_client,
+        phone: contact.phone,
+        organization: contact.organization,
+        created_at: contact.created_at
+    }));
 
     const options = {
         paginationSize: 10,
@@ -62,14 +77,17 @@ function Contacts() {
                         <button className='btn btn-basic card shadow-sm'><span className='text-primary'><FontAwesomeIcon icon={faPlus} className='pe-1' /> New Contact</span></button>
                     </div>
 
-                    <BootstrapTable
-                        keyField='name'
-                        data={data}
-                        columns={columns}
-                        classes='table-striped table-hover'
-                        filter={filterFactory()}
-                        pagination={paginationFactory(options)}
-                    />
+                    <div className='m-auto d-block w-100' style={{maxWidth: 1500, overflow: 'auto'}}>
+                        <BootstrapTable
+                            keyField='name'
+                            data={data}
+                            columns={columns}
+                            classes='table-striped table-hover table-responsive'
+                            filter={filterFactory()}
+                            pagination={paginationFactory(options)}
+                        />
+                    </div>
+
 
                 </div>
             </div>

@@ -24,7 +24,7 @@ body {
   min-height: 100vh;
 }
 
-.header{
+.header {
   width: 100%;
   border-bottom: 2px solid var(--color-dark-gray);
   padding: 1.5rem;
@@ -105,11 +105,11 @@ body {
   border-radius: 2rem
 }
 
-.w-fit{
+.w-fit {
   width: fit-content !important;
 }
 
-hr{
+hr {
   border-top: 2px solid var(--color-dark-gray) !important;
   opacity: 1 !important;
 }
@@ -142,13 +142,17 @@ hr{
   padding-bottom: .5rem;
 }
 
-#sidebar .nav-item.active, #sidebar .nav-item.active .nav-link,
-#sidebar .nav-item:hover, #sidebar .nav-item:hover .nav-link {
+#sidebar .nav-item.active,
+#sidebar .nav-item.active .nav-link,
+#sidebar .nav-item:hover,
+#sidebar .nav-item:hover .nav-link {
   color: var(--color-primary) !important;
 }
 
-#sidebar .nav-item:hover, #sidebar .nav-item:hover,
-#sidebar .nav-item.active, #sidebar .nav-item.active{
+#sidebar .nav-item:hover,
+#sidebar .nav-item:hover,
+#sidebar .nav-item.active,
+#sidebar .nav-item.active {
   background-color: white !important;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
@@ -160,18 +164,18 @@ hr{
   padding: 1rem;
 }
 
-#sidebar.active #toggleModalButton{
+#sidebar.active #toggleModalButton {
   left: 0;
   transform: translateX(0%);
 }
 
-#toggleModalButton{
+#toggleModalButton {
   left: var(--sidebar-width);
   transform: translateX(-50%);
   bottom: 3rem;
 }
 
-.auth-page-logo{
+.auth-page-logo {
   max-width: 105px;
   width: 100%;
 }
