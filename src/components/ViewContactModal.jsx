@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { saveLead } from '../api/leads';
 
-function ViewContactModal({showViewContactModal, setShowViewContactModal, selectedContact, setSelectedContact}) {
+function ViewContactModal({ showViewContactModal, setShowViewContactModal, selectedContact, setSelectedContact }) {
+
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const handleCloseAddContactsModal = () => {
         setShowViewContactModal(false);
+        setSuccessMessage("");
     };
+
+    const markContactAsLead = async () => {
+        try {
+            await saveLead(selectedContact.id);
+            setSuccessMessage("Contact markted as a lead!");
+        } catch (error) {
+            setErrors(error.message);
+        }
+    };
+
 
     return (
         <>
@@ -65,8 +80,11 @@ function ViewContactModal({showViewContactModal, setShowViewContactModal, select
 
                             </div>
                         </div>
-                        <div className='modal-footer border-0'>
-                            <button className='btn btn-primary rounded'>Mark as lead</button>
+                        <div className='modal-footer d-flex justify-content-between align-items-center border-0'>
+                            <div className="text-success">
+                                <span>{successMessage}</span>
+                            </div>
+                            <button className='btn btn-primary rounded' onClick={markContactAsLead}>Mark as lead</button>
                         </div>
                     </div>
                 </div>

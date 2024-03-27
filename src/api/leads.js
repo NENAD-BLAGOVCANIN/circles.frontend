@@ -27,11 +27,14 @@ const getLeads = async () => {
 
 }
 
-const saveLead = async (lead) => {
+const saveLead = async (contact_id) => {
 
     try {
 
-        const token = localStorage.getItem('accessToken'); 
+        const token = localStorage.getItem('accessToken');
+        const data = {
+            "contact_id": contact_id
+        }
 
         const response = await fetch(apiUrl + '/leads', {
             method: 'POST',
@@ -40,7 +43,7 @@ const saveLead = async (lead) => {
                 'Accept': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify(lead)
+            body: JSON.stringify(data)
         });
 
         const responseData = await response.json();
