@@ -4,10 +4,13 @@ const getContacts = async () => {
 
     try {
 
+        const token = localStorage.getItem('accessToken'); 
+
         const response = await fetch(apiUrl + '/contacts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
             },
         });
 
@@ -28,13 +31,14 @@ const saveContact = async (contact) => {
 
     try {
 
-        console.log(contact);
+        const token = localStorage.getItem('accessToken'); 
 
         const response = await fetch(apiUrl + '/contacts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(contact)
         });
