@@ -31,7 +31,13 @@ body {
   display: flex;
 }
 
-.main-content-wrapper {
+.main-content-wrapper{
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.main-container {
   padding: 1.5rem;
   background-color: white;
   min-height: 100vh;
@@ -178,4 +184,9 @@ hr {
 .auth-page-logo {
   max-width: 105px;
   width: 100%;
+}
+
+/* Add this CSS in your global CSS file or in the component's CSS file */
+.table-responsive {
+  overflow-x: auto;
 }

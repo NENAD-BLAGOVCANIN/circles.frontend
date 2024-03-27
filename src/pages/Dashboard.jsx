@@ -6,15 +6,15 @@ import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 
 function Dashboard() {
   return (
-    <div className='d-flex position-relative'>
+    <div className='main-content-wrapper'>
 
       <Sidebar />
 
-      <div className='w-100'>
+      <div className='w-100 overflow-auto'>
         
         <Header pageTitle="Dashboard" />
 
-        <div className='main-content-wrapper'>
+        <div className='main-container'>
 
           <div className="row">
             <div className="col-md-4 p-3">
