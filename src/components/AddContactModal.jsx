@@ -30,7 +30,7 @@ function AddContactModal({ contacts, setContacts, showAddContactsModal, setShowA
 
         try {
             const newContact = await saveContact(contact);
-            setContacts([...contacts, newContact]);
+            setContacts([newContact, ...contacts]);
             setShowAddContactsModal(false);
         } catch (error) {
             setErrors(error.message);

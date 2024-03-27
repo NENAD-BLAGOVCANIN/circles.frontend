@@ -65,6 +65,9 @@ function ViewContactModal({showViewContactModal, setShowViewContactModal, select
 
                             </div>
                         </div>
+                        <div className='modal-footer border-0'>
+                            <button className='btn btn-primary rounded'>Mark as lead</button>
+                        </div>
                     </div>
                 </div>
             </div>
