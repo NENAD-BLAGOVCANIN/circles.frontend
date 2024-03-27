@@ -53,4 +53,31 @@ const saveContact = async (contact) => {
 
 }
 
-export { getContacts, saveContact };
+
+const deleteContact = async (contact_id) => {
+
+    try {
+
+        const token = localStorage.getItem('accessToken'); 
+
+        const response = await fetch(apiUrl + '/contacts/' + contact_id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+
+export { getContacts, saveContact, deleteContact };
