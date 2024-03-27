@@ -6,9 +6,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getLeads } from '../api/leads';
 import { deleteLead } from '../api/leads';
 
-function Leads() {
+function Leads({leads, setLeads}) {
 
-    const [leads, setLeads] = useState([]);
 
     useEffect(() => {
         const fetchLeads = async () => {
@@ -66,8 +65,8 @@ function Leads() {
                                 </thead>
                                 <tbody>
                                     {leads.map(lead => (
-                                        <tr key={lead.contact.id}>
-                                            <td>{lead.contact.id}</td>
+                                        <tr key={lead.id}>
+                                            <td>{lead.id}</td>
                                             <td>{lead.contact.name}</td>
                                             <td>{lead.contact.email}</td>
                                             <td>{lead.contact.title}</td>
@@ -78,7 +77,7 @@ function Leads() {
                                             <td>{lead.contact.past_client}</td>
                                             <td>{lead.contact.phone}</td>
                                             <td>{lead.contact.organization}</td>
-                                            <td>{lead.contact.created_at}</td>
+                                            <td>{lead.created_at}</td>
                                             <td>
                                                 <div className="h-100 d-flex align-items-center justify-content-center">
                                                     <button className='btn btn-basic bg-gray text-danger shadow-sm' onClick={() => handleDeleteLead(lead.id)}>

@@ -8,9 +8,8 @@ import AddContactModal from '../components/AddContactModal';
 import { deleteContact } from '../api/contacts';
 import ViewContactModal from '../components/ViewContactModal';
 
-function Contacts() {
+function Contacts({contacts, setContacts, leads, setLeads}) {
 
-    const [contacts, setContacts] = useState([]);
     const [selectedContact, setSelectedContact] = useState([]);
     const [showAddContactsModal, setShowAddContactsModal] = useState(false);
     const [showViewContactModal, setShowViewContactModal] = useState(false);
@@ -93,8 +92,8 @@ function Contacts() {
                                             <td>
                                                 <div className="h-100 d-flex align-items-center justify-content-center">
                                                     <div className='px-1'>
-                                                        <button className='btn btn-basic bg-gray shadow-sm'>
-                                                            <FontAwesomeIcon icon={faBars} onClick={() => openViewContactModal(contact)} />
+                                                        <button className='btn btn-basic bg-gray shadow-sm' onClick={() => openViewContactModal(contact)}>
+                                                            <FontAwesomeIcon icon={faBars} />
                                                         </button>
                                                     </div>
                                                     <div className='px-1'>
@@ -132,6 +131,8 @@ function Contacts() {
                 setShowViewContactModal={setShowViewContactModal}
                 selectedContact={selectedContact}
                 setSelectedContact={setSelectedContact}
+                leads={leads}
+                setLeads={setLeads}
             />
 
         </div>

@@ -13,6 +13,8 @@ import Settings from './pages/Settings';
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [contacts, setContacts] = useState([]);
+  const [leads, setLeads] = useState([]);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -34,8 +36,8 @@ function App() {
         <Route path="/" element={authenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tasks" element={<Tasks />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/leads" element={<Leads />} />
+        <Route path="/contacts" element={<Contacts contacts={contacts} setContacts={setContacts} setLeads={setLeads} />} />
+        <Route path="/leads" element={<Leads leads={leads} setLeads={setLeads} />} />
         <Route path="/settings" element={<Settings />} />
 
         {/* Auth */}
