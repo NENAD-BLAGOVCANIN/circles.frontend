@@ -128,8 +128,6 @@ function Contacts() {
             />
 
             <ViewContactModal
-                contacts={contacts}
-                setContacts={setContacts}
                 showViewContactModal={showViewContactModal}
                 setShowViewContactModal={setShowViewContactModal}
                 selectedContact={selectedContact}

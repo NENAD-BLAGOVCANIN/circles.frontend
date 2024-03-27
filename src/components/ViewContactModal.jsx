@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
-import { saveContact } from '../api/contacts';
+import React from 'react'
 
-function ViewContactModal({contacts, setContacts, showViewContactModal, setShowViewContactModal, selectedContact, setSelectedContact}) {
+function ViewContactModal({showViewContactModal, setShowViewContactModal, selectedContact, setSelectedContact}) {
 
     const handleCloseAddContactsModal = () => {
         setShowViewContactModal(false);
@@ -63,17 +62,6 @@ function ViewContactModal({contacts, setContacts, showViewContactModal, setShowV
                                         {selectedContact.pastClient ? selectedContact.pastClient : 'No'}
                                     </span>
                                 </div>
-
-                                {errors && (
-                                    <div className="text-danger small">
-                                        {errors.email && errors.email.map((errorMessage, index) => (
-                                            <span key={index}>{errorMessage}</span>
-                                        ))}
-                                        {errors.name && errors.name.map((errorMessage, index) => (
-                                            <span key={index}>{errorMessage}</span>
-                                        ))}
-                                    </div>
-                                )}
 
                             </div>
                         </div>
