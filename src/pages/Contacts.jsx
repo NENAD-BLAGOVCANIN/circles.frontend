@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrash, faBars, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { getContacts } from '../api/contacts';
 import AddContactModal from '../components/AddContactModal';
 import { deleteContact } from '../api/contacts';
+import ViewContactModal from '../components/ViewContactModal';
 
 function Contacts() {
 
     const [contacts, setContacts] = useState([]);
+    const [selectedContact, setSelectedContact] = useState([]);
     const [showAddContactsModal, setShowAddContactsModal] = useState(false);
+    const [showViewContactModal, setShowViewContactModal] = useState(false);
 
     useEffect(() => {
         const fetchContacts = async () => {
@@ -18,7 +21,7 @@ function Contacts() {
                 const fetchedContacts = await getContacts();
                 setContacts(fetchedContacts);
             } catch (error) {
-                console.error('Error fetching contacts:', error);
+                console.error('Error fetching :', error);
             }
         };
 
@@ -37,6 +40,11 @@ function Contacts() {
         } catch (error) {
             console.error('Error deleting contact:', error);
         }
+    };
+
+    const openViewContactModal = (contact) => {
+        setSelectedContact(contact);
+        setShowViewContactModal(true);
     };
 
 
@@ -66,13 +74,9 @@ function Contacts() {
                                         <th>Title</th>
                                         <th>City</th>
                                         <th>Address</th>
-                                        <th>Description</th>
-                                        <th>Lead Source</th>
-                                        <th>Past Client</th>
                                         <th>Phone</th>
                                         <th>Organization</th>
-                                        <th>Date Added</th>
-                                        <th>Actions</th>
+                                        <th className='text-center'>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,17 +88,26 @@ function Contacts() {
                                             <td>{contact.title}</td>
                                             <td>{contact.city}</td>
                                             <td>{contact.address}</td>
-                                            <td>{contact.description}</td>
-                                            <td>{contact.lead_source}</td>
-                                            <td>{contact.past_client}</td>
                                             <td>{contact.phone}</td>
                                             <td>{contact.organization}</td>
-                                            <td>{contact.created_at}</td>
                                             <td>
                                                 <div className="h-100 d-flex align-items-center justify-content-center">
-                                                    <button className='btn btn-basic bg-gray text-danger shadow-sm' onClick={() => handleDeleteContact(contact.id)}>
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
+                                                    <div className='px-1'>
+                                                        <button className='btn btn-basic bg-gray shadow-sm'>
+                                                            <FontAwesomeIcon icon={faBars} onClick={() => openViewContactModal(contact)} />
+                                                        </button>
+                                                    </div>
+                                                    <div className='px-1'>
+                                                        <button className='btn btn-basic bg-gray shadow-sm' onClick={() => handleDeleteContact(contact.id)}>
+                                                            <FontAwesomeIcon icon={faEdit} />
+                                                        </button>
+                                                    </div>
+                                                    <div className='px-1'>
+                                                        <button className='btn btn-basic bg-gray text-danger shadow-sm' onClick={() => handleDeleteContact(contact.id)}>
+                                                            <FontAwesomeIcon icon={faTrash} />
+                                                        </button>
+                                                    </div>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -112,6 +125,15 @@ function Contacts() {
                 setContacts={setContacts}
                 showAddContactsModal={showAddContactsModal}
                 setShowAddContactsModal={setShowAddContactsModal}
+            />
+
+            <ViewContactModal
+                contacts={contacts}
+                setContacts={setContacts}
+                showViewContactModal={showViewContactModal}
+                setShowViewContactModal={setShowViewContactModal}
+                selectedContact={selectedContact}
+                setSelectedContact={setSelectedContact}
             />
 
         </div>
