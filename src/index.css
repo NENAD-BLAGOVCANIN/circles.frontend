@@ -186,7 +186,7 @@ hr {
   width: 100%;
 }
 
-/* Add this CSS in your global CSS file or in the component's CSS file */
-.table-responsive {
-  overflow-x: auto;
+.task-card:hover{
+  background-color: var(--color-gray);
+  cursor: pointer;
 }

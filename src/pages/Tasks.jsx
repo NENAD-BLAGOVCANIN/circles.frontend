@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { getTasks } from '../api/tasks'
+import TaskModal from '../components/TaskModal'
 
 function Tasks() {
 
 
     const [tasks, setTasks] = useState([]);
+    const [selectedTask, setSelectedTask] = useState([]);
+    const [showTasksModal, setShowTasksModal] = useState(false);
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -20,6 +23,11 @@ function Tasks() {
 
         fetchTasks();
     }, []);
+
+    const handleShowTaskModal = (task) => {
+        setSelectedTask(task);
+        setShowTasksModal(true);
+    }
 
     return (
         <div className='main-content-wrapper'>
@@ -38,7 +46,7 @@ function Tasks() {
                                 TODO
                             </div>
                             {tasks.filter(task => task.status === 'todo').map(task => (
-                                <div className="card mb-3">
+                                <div className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
                                         <h4 className='pe-2'>{task.subject}</h4>
                                         <span className='text-muted'>{task.description}</span>
@@ -51,7 +59,7 @@ function Tasks() {
                                 IN PROGRESS
                             </div>
                             {tasks.filter(task => task.status === 'in_progress').map(task => (
-                                <div className="card mb-3">
+                                <div className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
                                         <h4 className='pe-2'>{task.subject}</h4>
                                         <span className='text-muted'>{task.description}</span>
@@ -64,7 +72,7 @@ function Tasks() {
                                 DONE
                             </div>
                             {tasks.filter(task => task.status === 'done').map(task => (
-                                <div className="card mb-3">
+                                <div className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
                                         <h4 className='pe-2'>{task.subject}</h4>
                                         <span className='text-muted'>{task.description}</span>
@@ -76,6 +84,14 @@ function Tasks() {
 
                 </div>
             </div>
+
+
+            <TaskModal 
+                showTasksModal={showTasksModal} 
+                setShowTasksModal={setShowTasksModal} 
+                selectedTask={selectedTask}
+                setSelectedTask={setSelectedTask}
+            />
 
 
         </div>
