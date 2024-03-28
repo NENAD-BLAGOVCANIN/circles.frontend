@@ -10,6 +10,7 @@ function Tasks() {
     const [tasks, setTasks] = useState([]);
     const [selectedTask, setSelectedTask] = useState([]);
     const [showTasksModal, setShowTasksModal] = useState(false);
+    const [showAddTaskCard, setShowAddTaskCard] = useState(false);
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -27,6 +28,14 @@ function Tasks() {
     const handleShowTaskModal = (task) => {
         setSelectedTask(task);
         setShowTasksModal(true);
+    }
+
+    const handleShowAddTaskCard = () => {
+        setShowAddTaskCard(true);
+    }
+
+    const handleHideAddTaskCard = () => {
+        setShowAddTaskCard(false);
     }
 
     return (
@@ -53,6 +62,26 @@ function Tasks() {
                                     </div>
                                 </div>
                             ))}
+
+                            <div className={`task-card card mb-3 ${showAddTaskCard ? '' : 'd-none'}`}>
+                                <div className=''>
+                                    <input type="text" className='form-control bg-gray mb-2' placeholder='Subject' />
+                                    <textarea className='form-control bg-gray mb-2' placeholder='Description' />
+                                    <div className='d-flex justify-content-end w-100'>
+                                        <div className='pe-1'>
+                                            <button className='btn btn-basic border' onClick={handleHideAddTaskCard}>Dismiss</button>
+                                        </div>
+                                        <div className='ps-1'>
+                                            <button className='btn btn-primary'>Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button className='btn btn-dark py-2 rounded w-100' onClick={handleShowAddTaskCard}>
+                                Add Task
+                            </button>
+
                         </div>
                         <div className="col-4 p-3">
                             <div className='bg-dark rounded text-white text-center mb-3 py-2'>
@@ -86,9 +115,9 @@ function Tasks() {
             </div>
 
 
-            <TaskModal 
-                showTasksModal={showTasksModal} 
-                setShowTasksModal={setShowTasksModal} 
+            <TaskModal
+                showTasksModal={showTasksModal}
+                setShowTasksModal={setShowTasksModal}
                 selectedTask={selectedTask}
                 setSelectedTask={setSelectedTask}
             />
