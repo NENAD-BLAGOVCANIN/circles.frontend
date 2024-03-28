@@ -77,7 +77,7 @@ function Tasks() {
                                 </div>
                             ))}
 
-                            <div className={`task-card card mb-3 ${showAddTaskCard ? '' : 'd-none'}`}>
+                            <div className={`task-card card mb-3 ${(showAddTaskCard || tasks.length == 0) ? '' : 'd-none'}`}>
                                 <div className=''>
                                     <input
                                         type="text"
