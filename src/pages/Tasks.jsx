@@ -145,6 +145,8 @@ function Tasks() {
                 setShowTasksModal={setShowTasksModal}
                 selectedTask={selectedTask}
                 setSelectedTask={setSelectedTask}
+                tasks={tasks}
+                setTasks={setTasks}
             />
 
 
