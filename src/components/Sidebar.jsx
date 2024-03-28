@@ -1,12 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompass, faAddressBook, faUser, faListCheck, faUserTie, faRightFromBracket, faBars, faChevronUp, faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { getUserInfo } from '../api/user';
 
 function Sidebar() {
 
     const [sidebarActive, setSidebarActive] = useState(false);
     const [currentPage, setCurrentPage] = useState(window.location.pathname);
+    const [userInfo, setUserInfo] = useState([]);
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const fetchedUserInfo = await getUserInfo();
+                setUserInfo(fetchedUserInfo);
+            } catch (error) {
+                console.error('Error fetching :', error);
+            }
+        };
+
+        fetchUserInfo();
+    }, []);
+
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -25,9 +41,9 @@ function Sidebar() {
                     <div className='p-2 rounded bg-black'>
                         <FontAwesomeIcon icon={faUser} className='text-white px-1' />
                     </div>
-                    <span className='px-2'>
-                        Nenad's workspace
-                    </span>
+                    {userInfo && (
+                        <span className='px-2'>{userInfo.team.name}</span>
+                    )}
                     <div className='p-2 d-flex flex-column align-items-center justify-content-center'>
                         <FontAwesomeIcon icon={faChevronUp} className='text-muted small' />
                         <FontAwesomeIcon icon={faChevronDown} className='text-muted small' />

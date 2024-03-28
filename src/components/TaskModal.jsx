@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { updateTask } from '../api/tasks';
 import profileImagePlaceholder from '../assets/img/profile.svg'
+import UpdateAssigneeDropdown from './UpdateAssigneeDropdown';
 
 function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks }) {
     const [editedTitle, setEditedTitle] = useState(selectedTask.subject);
@@ -112,7 +113,8 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                             {selectedTask.assignee && (
                                 <div className='d-flex align-items-center pt-2'>
                                     <img src={profileImagePlaceholder} className='rounded-circle' alt="" style={{ maxHeight: 35, height: '100%' }} />
-                                    <span className='ps-2'>{selectedTask.assignee.name}</span>
+                                    <span className='px-2'>{selectedTask.assignee.name}</span>
+                                    <UpdateAssigneeDropdown />
                                 </div>
                             )}
 
