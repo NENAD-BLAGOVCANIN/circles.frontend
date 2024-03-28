@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { updateTask } from '../api/tasks';
+import profileImagePlaceholder from '../assets/img/profile.svg'
 
 function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks }) {
     const [editedTitle, setEditedTitle] = useState(selectedTask.subject);
@@ -107,7 +108,14 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                             <p className='text-muted' onBlur={handleBlur}>
                                 <span ref={descriptionRef} contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleDescriptionChange} dir="ltr">{editedDescription}</span>
                             </p>
-                            <h5 className='mt-5'>Assigned to</h5>
+                            <h5 className='mt-5'>Assignee</h5>
+                            {selectedTask.assignee && (
+                                <div className='d-flex align-items-center pt-2'>
+                                    <img src={profileImagePlaceholder} className='rounded-circle' alt="" style={{ maxHeight: 35, height: '100%' }} />
+                                    <span className='ps-2'>{selectedTask.assignee.name}</span>
+                                </div>
+                            )}
+
                         </div>
                         <div className='modal-footer border-0'>
                             <div className='px-1'>
