@@ -9,6 +9,7 @@ import Logout from './pages/Logout';
 import Contacts from './pages/Contacts';
 import Leads from './pages/Leads';
 import Settings from './pages/Settings';
+import Profile from './pages/Profile';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -38,6 +39,7 @@ function App() {
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/contacts" element={<Contacts contacts={contacts} setContacts={setContacts} setLeads={setLeads} />} />
         <Route path="/leads" element={<Leads leads={leads} setLeads={setLeads} />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
 
         {/* Auth */}

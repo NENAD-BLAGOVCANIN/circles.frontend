@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompass, faAddressBook, faUser, faListCheck, faUserTie, faRightFromBracket, faBars, faChevronUp, faChevronDown, faGear, faPlus, faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { getUserInfo } from '../api/user';
-import { getMyTeams } from '../api/team';
+import { getMyTeams, switchTeam } from '../api/team';
 import CreateTeamSpaceModal from './CreateTeamSpaceModal';
 
 function Sidebar() {
@@ -52,6 +52,16 @@ function Sidebar() {
         setShowCreateTeamspaceModal(true);
     }
 
+    const handleSwitchTeam = async (team_id) => {
+        try {
+            await switchTeam(team_id);
+            window.location.reload();
+
+        } catch (error) {
+            console.error('Error fetching :', error);
+        }
+    }
+
     return (
 
         <>
@@ -73,7 +83,7 @@ function Sidebar() {
                         <div className="dropdown-menu border-0 shadow w-100 show" aria-labelledby="dropdownMenuButton" style={{ transform: 'translateY(50%)', left: 0 }}>
                             <a className="dropdown-item fw-500 pb-2 small">Workspaces</a>
                             {myTeams.map(team => (
-                                <a className="dropdown-item d-flex align-items-center py-2">
+                                <a className="dropdown-item d-flex align-items-center py-2" onClick={() => { handleSwitchTeam(team.id) }}>
                                     <span className='small'>{team.name}</span>
                                     <div className='p-2 d-flex flex-column align-items-center justify-content-center'>
                                         <FontAwesomeIcon icon={faArrowRightArrowLeft} className='text-muted small' />
@@ -109,12 +119,6 @@ function Sidebar() {
                             <span className='ps-3'>Tasks</span>
                         </Link>
                     </li>
-                    <li className={`nav-item px-2 rounded ${currentPage === '/settings' ? 'active' : ''}`}>
-                        <Link to="/settings" className='nav-link' onClick={() => handlePageChange('/settings')}>
-                            <FontAwesomeIcon icon={faGear} />
-                            <span className='ps-3'>Settings</span>
-                        </Link>
-                    </li>
 
                     <hr />
 
@@ -125,7 +129,21 @@ function Sidebar() {
                         </span>
                     </li>
 
+                    <li className={`nav-item px-2 rounded ${currentPage === '/settings' ? 'active' : ''}`}>
+                        <Link to="/settings" className='nav-link' onClick={() => handlePageChange('/settings')}>
+                            <FontAwesomeIcon icon={faGear} />
+                            <span className='ps-3'>Settings</span>
+                        </Link>
+                    </li>
+
                     <hr />
+
+                    <li className='nav-item px-2 rounded'>
+                        <Link to="/profile" className='nav-link'>
+                            <FontAwesomeIcon icon={faUser} />
+                            <span className='ps-3'>My Profile</span>
+                        </Link>
+                    </li>
 
                     <li className='nav-item px-2 rounded'>
                         <Link to="/logout" className='nav-link'>

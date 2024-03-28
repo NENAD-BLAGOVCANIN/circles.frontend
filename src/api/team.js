@@ -55,6 +55,36 @@ const getMyTeams = async () => {
 
 }
 
+const switchTeam = async (team_id) => {
+
+    try {
+
+        const token = localStorage.getItem('accessToken');
+
+        const data = {
+            "team_id": team_id
+        }
+
+        const response = await fetch(apiUrl + '/switch-team', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
 
 const saveTeam = async (name, description) => {
 
@@ -87,4 +117,4 @@ const saveTeam = async (name, description) => {
 
 }
 
-export { getTeamMembers, getMyTeams, saveTeam }
+export { getTeamMembers, getMyTeams, saveTeam, switchTeam }
