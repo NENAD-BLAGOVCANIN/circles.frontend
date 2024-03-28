@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass, faAddressBook, faUser, faListCheck, faUserTie, faRightFromBracket, faBars, faChevronUp, faChevronDown, faGear, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCompass, faAddressBook, faUser, faListCheck, faUserTie, faRightFromBracket, faBars, faChevronUp, faChevronDown, faGear, faPlus, faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { getUserInfo } from '../api/user';
+import { getMyTeams } from '../api/team';
 import CreateTeamSpaceModal from './CreateTeamSpaceModal';
 
 function Sidebar() {
@@ -11,12 +12,25 @@ function Sidebar() {
     const [currentPage, setCurrentPage] = useState(window.location.pathname);
     const [userInfo, setUserInfo] = useState(null);
     const [showCreateTeamspaceModal, setShowCreateTeamspaceModal] = useState(false);
+    const [teamspaceDropdownOpen, setTeamspaceDropdownOpen] = useState(false);
+    const [myTeams, setMyTeams] = useState([]);
+
+    const toggleDropdown = () => {
+        setTeamspaceDropdownOpen(!teamspaceDropdownOpen);
+    };
 
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
                 const fetchedUserInfo = await getUserInfo();
                 setUserInfo(fetchedUserInfo);
+            } catch (error) {
+                console.error('Error fetching :', error);
+            }
+
+            try {
+                const fetchedMyTeams = await getMyTeams();
+                setMyTeams(fetchedMyTeams);
             } catch (error) {
                 console.error('Error fetching :', error);
             }
@@ -43,20 +57,31 @@ function Sidebar() {
         <>
             <nav id="sidebar" className={sidebarActive ? 'active' : ''}>
 
-                <div className="nav-item rounded card px-2">
+                <div className="nav-item rounded card px-2 pointer" onClick={toggleDropdown}>
                     <div className='d-flex align-items-center justify-content-around'>
                         <div className='p-2 rounded bg-black'>
                             <FontAwesomeIcon icon={faUser} className='text-white px-1' />
                         </div>
-                        {userInfo && (
-                            <span className='px-2'>{userInfo.team.name}</span>
-                        )}
+                        <span className='px-2'>{userInfo && userInfo.team.name}</span>
                         <div className='p-2 d-flex flex-column align-items-center justify-content-center'>
                             <FontAwesomeIcon icon={faChevronUp} className='text-muted small' />
                             <FontAwesomeIcon icon={faChevronDown} className='text-muted small' />
                         </div>
                     </div>
 
+                    {teamspaceDropdownOpen && (
+                        <div className="dropdown-menu border-0 shadow w-100 show" aria-labelledby="dropdownMenuButton" style={{ transform: 'translateY(50%)', left: 0 }}>
+                            <a className="dropdown-item fw-500 pb-2 small">Workspaces</a>
+                            {myTeams.map(team => (
+                                <a className="dropdown-item d-flex align-items-center py-2">
+                                    <span className='small'>{team.name}</span>
+                                    <div className='p-2 d-flex flex-column align-items-center justify-content-center'>
+                                        <FontAwesomeIcon icon={faArrowRightArrowLeft} className='text-muted small' />
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <ul className="list-unstyled py-4">

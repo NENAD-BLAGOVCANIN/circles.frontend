@@ -27,6 +27,35 @@ const getTeamMembers = async () => {
 
 }
 
+
+const getMyTeams = async () => {
+
+    try {
+
+        const token = localStorage.getItem('accessToken');
+
+        const response = await fetch(apiUrl + '/my-teams', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            return responseData;
+        } else {
+            throw new Error(responseData.errors);
+        }
+    } catch (error) {
+        throw new Error(error);
+    }
+
+}
+
+
 const saveTeam = async (name, description) => {
 
     try {
@@ -58,4 +87,4 @@ const saveTeam = async (name, description) => {
 
 }
 
-export { getTeamMembers, saveTeam }
+export { getTeamMembers, getMyTeams, saveTeam }
