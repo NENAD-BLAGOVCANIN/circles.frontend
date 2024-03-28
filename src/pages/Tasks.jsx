@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
-import { getTasks } from '../api/tasks'
+import { getTasks, saveTask } from '../api/tasks'
 import TaskModal from '../components/TaskModal'
 
 function Tasks() {
@@ -11,6 +11,8 @@ function Tasks() {
     const [selectedTask, setSelectedTask] = useState([]);
     const [showTasksModal, setShowTasksModal] = useState(false);
     const [showAddTaskCard, setShowAddTaskCard] = useState(false);
+    const [subject, setSubject] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -38,6 +40,18 @@ function Tasks() {
         setShowAddTaskCard(false);
     }
 
+    const handleSaveTask = async () => {
+        try {
+            const newTask = await saveTask(subject, description);
+            setTasks([newTask, ...tasks]);
+            setShowAddTaskCard(false);
+        } catch {
+
+        }
+
+    };
+
+
     return (
         <div className='main-content-wrapper'>
 
@@ -55,7 +69,7 @@ function Tasks() {
                                 TODO
                             </div>
                             {tasks.filter(task => task.status === 'todo').map(task => (
-                                <div className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
+                                <div key={task.id} className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
                                         <h4 className='pe-2'>{task.subject}</h4>
                                         <span className='text-muted'>{task.description}</span>
@@ -65,14 +79,25 @@ function Tasks() {
 
                             <div className={`task-card card mb-3 ${showAddTaskCard ? '' : 'd-none'}`}>
                                 <div className=''>
-                                    <input type="text" className='form-control bg-gray mb-2' placeholder='Subject' />
-                                    <textarea className='form-control bg-gray mb-2' placeholder='Description' />
+                                    <input
+                                        type="text"
+                                        className='form-control bg-gray mb-2'
+                                        placeholder='Subject'
+                                        value={subject}
+                                        onChange={(e) => setSubject(e.target.value)}
+                                    />
+                                    <textarea
+                                        className='form-control bg-gray mb-2'
+                                        placeholder='Description'
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                    />
                                     <div className='d-flex justify-content-end w-100'>
                                         <div className='pe-1'>
                                             <button className='btn btn-basic border' onClick={handleHideAddTaskCard}>Dismiss</button>
                                         </div>
                                         <div className='ps-1'>
-                                            <button className='btn btn-primary'>Save</button>
+                                            <button className='btn btn-primary' onClick={handleSaveTask}>Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +113,7 @@ function Tasks() {
                                 IN PROGRESS
                             </div>
                             {tasks.filter(task => task.status === 'in_progress').map(task => (
-                                <div className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
+                                <div key={task.id} className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
                                         <h4 className='pe-2'>{task.subject}</h4>
                                         <span className='text-muted'>{task.description}</span>
@@ -101,7 +126,7 @@ function Tasks() {
                                 DONE
                             </div>
                             {tasks.filter(task => task.status === 'done').map(task => (
-                                <div className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
+                                <div key={task.id} className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
                                         <h4 className='pe-2'>{task.subject}</h4>
                                         <span className='text-muted'>{task.description}</span>

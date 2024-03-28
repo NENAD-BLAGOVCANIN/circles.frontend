@@ -27,20 +27,25 @@ const getTasks = async () => {
 
 }
 
-const saveTask = async (contact) => {
+const saveTask = async (subject, description) => {
+
+    const data = {
+        "subject": subject,
+        "description": description
+    }
 
     try {
 
         const token = localStorage.getItem('accessToken'); 
 
-        const response = await fetch(apiUrl + '/contacts', {
+        const response = await fetch(apiUrl + '/tasks', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify(contact)
+            body: JSON.stringify(data)
         });
 
         const responseData = await response.json();
