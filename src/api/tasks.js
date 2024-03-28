@@ -58,6 +58,35 @@ const saveTask = async (subject, description) => {
 
 }
 
+const updateTask = async (updatedTask) => {
+
+    try{
+
+        const token = localStorage.getItem('accessToken');
+        const data = updatedTask;
+
+        console.log(data);
+
+        const response = await fetch(apiUrl + '/tasks/' + String(updatedTask.id), {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
 
 const deleteTask = async (contact_id) => {
 
@@ -85,4 +114,4 @@ const deleteTask = async (contact_id) => {
 }
 
 
-export { getTasks, saveTask, deleteTask };
+export { getTasks, saveTask, updateTask, deleteTask };

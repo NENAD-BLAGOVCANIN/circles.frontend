@@ -1,4 +1,5 @@
 import React from 'react'
+import { updateTask } from '../api/tasks';
 
 function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks }) {
 
@@ -6,7 +7,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
         setShowTasksModal(false);
     };
 
-    const changeTaskStatus = (status) => {
+    const changeTaskStatus = async (status) => {
         const taskIndex = tasks.findIndex(task => task.id === selectedTask.id);
         if (taskIndex !== -1) {
             const updatedTasks = [...tasks];
@@ -16,11 +17,22 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
             };
             setTasks(updatedTasks);
         }
-        setSelectedTask(prevTask => ({
-            ...prevTask,
+
+        const updatedTask = {
+            ...selectedTask,
             status: status
-        }));
+        };
+
+        console.log(updatedTask);
+
+        const response = await updateTask(updatedTask);
+
+        if (response.ok){
+            setSelectedTask(updatedTask);
+        }
+
     };
+
 
     return (
         <>
