@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { updateTask } from '../api/tasks';
 
 function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks }) {
     const [editedTitle, setEditedTitle] = useState(selectedTask.subject);
     const [editedDescription, setEditedDescription] = useState(selectedTask.description);
+    const titleRef = useRef(null);
+    const descriptionRef = useRef(null);
 
     useEffect(() => {
         setEditedTitle(selectedTask.subject);
@@ -14,12 +16,29 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
         setShowTasksModal(false);
     };
 
-    const handleTitleChange = (event) => {
-        setEditedTitle(event.target.textContent);
+    const handleTitleChange = () => {
+        const caretPosition = titleRef.current.innerText.length;
+        setEditedTitle(titleRef.current.innerText);
+        setTimeout(() => {
+            setCaretPosition(titleRef.current, caretPosition);
+        }, 0);
     };
 
-    const handleDescriptionChange = (event) => {
-        setEditedDescription(event.target.textContent);
+    const handleDescriptionChange = () => {
+        const caretPosition = descriptionRef.current.innerText.length;
+        setEditedDescription(descriptionRef.current.innerText);
+        setTimeout(() => {
+            setCaretPosition(descriptionRef.current, caretPosition);
+        }, 0);
+    };
+
+    const setCaretPosition = (element, position) => {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.setStart(element.childNodes[0], position);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
     };
 
     const handleBlur = async () => {
@@ -29,11 +48,9 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
             description: editedDescription
         };
 
-        const response = await updateTask(updatedTask);
-        
-        setSelectedTask(updatedTask);
+        await updateTask(updatedTask);
 
-        console.log(updateTask);
+        setSelectedTask(updatedTask);
 
         const updatedTasks = tasks.map(task => {
             if (task.id === updatedTask.id) {
@@ -42,7 +59,6 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
             return task;
         });
         setTasks(updatedTasks);
-
     };
 
     const changeTaskStatus = async (status) => {
@@ -76,7 +92,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                         <div className="modal-header pb-0 border-0 d-flex align-items-center">
                             <div>
                                 <h4 className="modal-title bold m-0" onBlur={handleBlur}>
-                                    <span contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleTitleChange}>{editedTitle}</span>
+                                    <span ref={titleRef} contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleTitleChange} dir="ltr">{editedTitle}</span>
                                 </h4>
                                 <span className='small text-muted'>
                                     In list <u>{selectedTask.status}</u>
@@ -89,7 +105,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                         <div className='modal-body py-5'>
                             <h5>Description</h5>
                             <p className='text-muted' onBlur={handleBlur}>
-                                <span contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleDescriptionChange}>{editedDescription}</span>
+                                <span ref={descriptionRef} contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleDescriptionChange} dir="ltr">{editedDescription}</span>
                             </p>
                             <h5 className='mt-5'>Assigned to</h5>
                         </div>
