@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { updateTask } from '../api/tasks';
 import profileImagePlaceholder from '../assets/img/profile.svg';
 import UpdateAssigneeDropdown from './UpdateAssigneeDropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck, faListCheck, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks, teamMembers, setTeamMembers }) {
     const [editedTitle, setEditedTitle] = useState(selectedTask.subject);
@@ -138,13 +140,22 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                         </div>
                         <div className='modal-footer border-0'>
                             <div className='px-1'>
-                                <button className='btn btn-basic border' onClick={() => { changeTaskStatus('todo') }}>Move to <span className='text-info'>Todo</span></button>
+                                <button className='btn btn-basic border d-flex' onClick={() => { changeTaskStatus('todo') }}>
+                                    Move to 
+                                    <span className='d-flex align-items-center text-info ps-2'> Todo <FontAwesomeIcon className='ps-2' icon={faListCheck} /></span>
+                                </button>
                             </div>
                             <div className='px-1'>
-                                <button className='btn btn-basic border' onClick={() => { changeTaskStatus('in_progress') }}>Move to <span className='text-warning'>In progress</span></button>
+                                <button className='btn btn-basic border d-flex' onClick={() => { changeTaskStatus('in_progress') }}>
+                                    Move to 
+                                    <span className='d-flex align-items-center text-warning ps-2'> In progress <FontAwesomeIcon className='ps-2' icon={faSpinner} /></span>
+                                </button>
                             </div>
                             <div className='px-1'>
-                                <button className='btn btn-basic border' onClick={() => { changeTaskStatus('done') }}>Move to <span className='text-success'>Done</span></button>
+                                <button className='btn btn-basic border d-flex' onClick={() => { changeTaskStatus('done') }}>
+                                    Mark as
+                                    <span className='d-flex align-items-center text-success ps-2'> Done <FontAwesomeIcon className='ps-2' icon={faCircleCheck} /></span>
+                                </button>
                             </div>
                         </div>
                     </div>
