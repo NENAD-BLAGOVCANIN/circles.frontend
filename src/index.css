@@ -198,3 +198,8 @@ hr {
     z-index: 9999 !important;
   }
 }
+
+.form-control{
+  border: none !important;
+  background-color: #f0f0f0 !important;
+}
