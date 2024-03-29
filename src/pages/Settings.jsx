@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { getTeamInfo, getTeamMembers, updateTeamInfo } from '../api/team'
 import placeholderProfileImage from '../assets/img/profile.svg'
+import { apiUrl } from '../api/config'
 
 function Settings() {
 
@@ -19,10 +20,8 @@ function Settings() {
                 const fetchedTeamInfo = await getTeamInfo();
                 setTeam(fetchedTeamInfo);
 
-                setTeam((prevTeam) => {
-                    setName(prevTeam.name);
-                    setDescription(prevTeam.description);
-                });
+                setName(fetchedTeamInfo.name);
+                setDescription(fetchedTeamInfo.description);
 
             } catch (error) {
                 console.error('Error fetching :', error);
@@ -81,7 +80,14 @@ function Settings() {
                         ))}
                     </div>
 
-
+                    <label className='mt-3'>Invite Link:</label>
+                    {team && (
+                        <input
+                            type="text"
+                            className='form-control bg-gray'
+                            value={`${apiUrl}/teams/invite/${team.invite_code}`}
+                        />
+                    )}
                 </div>
             </div>
 
