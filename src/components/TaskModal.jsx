@@ -91,7 +91,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
         <>
             <div className={`modal fade ${showTasksModal ? 'show d-block' : ''}`} tabIndex="-1" role="dialog">
                 <div className="modal-dialog modal-dialog-centered" role="document" style={{ maxWidth: 800, padding: '1.7rem' }}>
-                    <div className="modal-content py-3 px-4 border-0 shadow-lg" style={{ maxHeight: 800, overflow: 'auto' }}>
+                    <div className="modal-content py-3 px-4 border-0 shadow-lg" style={{ maxHeight: 900, overflow: 'auto' }}>
                         <div className="modal-header pb-0 border-0 d-flex align-items-center">
                             <div>
                                 <h4 className="modal-title bold m-0" onBlur={handleBlur}>
@@ -117,7 +117,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                                     <span className='px-2'>{selectedTask.assignee.name}</span>
                                 </div>
                             )}
-                            <UpdateAssigneeDropdown teamMembers={teamMembers} />
+                            <UpdateAssigneeDropdown teamMembers={teamMembers} selectedTask={selectedTask} setSelectedTask={setSelectedTask} tasks={tasks} setTasks={setTasks} />
 
                         </div>
                         <div className='modal-footer border-0'>

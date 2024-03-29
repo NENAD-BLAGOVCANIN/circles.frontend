@@ -58,6 +58,37 @@ const saveTask = async (subject, description) => {
 
 }
 
+const assignTo = async (user_id, task_id) => {
+
+    const data = {
+        "user_id": user_id,
+        "task_id": task_id
+    }
+
+    try {
+
+        const token = localStorage.getItem('accessToken'); 
+
+        const response = await fetch(apiUrl + '/tasks/assign', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
 const updateTask = async (updatedTask) => {
 
     try{
@@ -114,4 +145,4 @@ const deleteTask = async (contact_id) => {
 }
 
 
-export { getTasks, saveTask, updateTask, deleteTask };
+export { getTasks, saveTask, updateTask, assignTo, deleteTask };

@@ -5,8 +5,9 @@
   --color-background: #fff;
   --color-dark: #393646;
   --color-danger: #cf004c;
-  --color-gray: #f6f7f9;
-  --color-dark-gray: #e8eaee;
+  --color-light-gray: #f6f7f9;
+  --color-gray: #e8eaee;
+  --color-dark-gray: #f0f0f0;
   --color-light: #f8f8f8;
   --sidebar-width: 310px
 }
@@ -26,7 +27,7 @@ body {
 
 .header {
   width: 100%;
-  border-bottom: 2px solid var(--color-dark-gray);
+  border-bottom: 2px solid var(--color-gray);
   padding: 1.5rem;
   display: flex;
 }
@@ -49,7 +50,7 @@ body {
 }
 
 .bg-gray {
-  background-color: var(--color-gray) !important;
+  background-color: var(--color-light-gray) !important;
 }
 
 .btn-primary,
@@ -116,7 +117,7 @@ body {
 }
 
 hr {
-  border-top: 2px solid var(--color-dark-gray) !important;
+  border-top: 2px solid var(--color-gray) !important;
   opacity: 1 !important;
 }
 
@@ -125,13 +126,13 @@ hr {
   max-width: var(--sidebar-width);
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-gray);
+  background-color: var(--color-light-gray);
   transition: all 0.3s;
   padding-top: 1.3rem;
   padding-bottom: 1.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-right: 2px solid var(--color-dark-gray) !important
+  border-right: 2px solid var(--color-gray) !important
 }
 
 #sidebar.active {
@@ -165,7 +166,7 @@ hr {
 
 .card {
   background-color: transparent;
-  border: 2px solid var(--color-dark-gray) !important;
+  border: 2px solid var(--color-gray) !important;
   border-radius: 1.2rem;
   padding: 1rem;
 }
@@ -188,7 +189,7 @@ hr {
 }
 
 .task-card:hover{
-  background-color: var(--color-gray);
+  background-color: var(--color-light-gray);
   cursor: pointer;
 }
 
@@ -201,5 +202,9 @@ hr {
 
 .form-control{
   border: none !important;
-  background-color: #f0f0f0 !important;
+  background-color: var(--color-dark-gray) !important;
+}
+
+.assignee-nav-item:hover{
+  background-color: var(--color-dark-gray);
 }
