@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { updateTask } from '../api/tasks';
-import profileImagePlaceholder from '../assets/img/profile.svg'
+import profileImagePlaceholder from '../assets/img/profile.svg';
 import UpdateAssigneeDropdown from './UpdateAssigneeDropdown';
 
 function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks, teamMembers, setTeamMembers }) {
@@ -20,7 +20,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
     };
 
     const handleTitleChange = () => {
-        const caretPosition = titleRef.current.innerText.length;
+        const caretPosition = window.getSelection().getRangeAt(0).startOffset;
         setEditedTitle(titleRef.current.innerText);
         setTimeout(() => {
             setCaretPosition(titleRef.current, caretPosition);
@@ -28,33 +28,47 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
     };
 
     const handleDescriptionChange = () => {
-        const caretPosition = descriptionRef.current.innerText.length;
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        const caretPosition = range.startOffset;
         setEditedDescription(descriptionRef.current.innerText);
         setTimeout(() => {
             setCaretPosition(descriptionRef.current, caretPosition);
         }, 0);
     };
-
+    
+    
     const setCaretPosition = (element, position) => {
         const range = document.createRange();
         const selection = window.getSelection();
-        range.setStart(element.childNodes[0], position);
+    
+        if (element.childNodes.length > 0) {
+            range.setStart(element.childNodes[0], Math.min(position, element.textContent.length));
+        } else {
+            range.setStart(element, Math.min(position, element.textContent.length));
+        }
+    
         range.collapse(true);
+    
         selection.removeAllRanges();
         selection.addRange(range);
     };
 
     const handleBlur = async () => {
+        if (editedTitle.trim() === '') {
+            return;
+        }
+    
         const updatedTask = {
             ...selectedTask,
             subject: editedTitle,
             description: editedDescription
         };
-
+    
         await updateTask(updatedTask);
-
+    
         setSelectedTask(updatedTask);
-
+    
         const updatedTasks = tasks.map(task => {
             if (task.id === updatedTask.id) {
                 return updatedTask;
@@ -107,9 +121,7 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                         </div>
                         <div className='modal-body py-5'>
                             <h5>Description</h5>
-                            <p className='text-muted' onBlur={handleBlur}>
-                                <span ref={descriptionRef} contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleDescriptionChange} dir="ltr">{editedDescription}</span>
-                            </p>
+                            <div className='form-control rounded w-100 py-2' ref={descriptionRef} contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleDescriptionChange} dir="ltr">{editedDescription}</div>
 
                             <div className='d-flex align-items-center mt-5'>
                                 <h5 className='mb-0 pe-3'>Assignee</h5>
