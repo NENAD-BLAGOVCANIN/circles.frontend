@@ -65,13 +65,13 @@ function Tasks() {
 
                     <div className="row">
                         <div className="col-4 p-3">
-                            <div className='bg-dark rounded text-white text-center mb-3 py-2'>
+                            <div className='rounded text-center mb-3 py-2' style={{backgroundColor: '#B4EBFF'}}>
                                 TODO
                             </div>
                             {tasks.filter(task => task.status === 'todo').map(task => (
                                 <div key={task.id} className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
-                                        <h4 className='pe-2'>{task.subject}</h4>
+                                        <h5 className='pe-2'>{task.subject}</h5>
                                         <span className='text-muted'>{task.description}</span>
                                     </div>
                                 </div>
@@ -109,26 +109,26 @@ function Tasks() {
 
                         </div>
                         <div className="col-4 p-3">
-                            <div className='bg-dark rounded text-white text-center mb-3 py-2'>
+                            <div className='rounded text-center mb-3 py-2' style={{backgroundColor: '#EBFFB4'}}>
                                 IN PROGRESS
                             </div>
                             {tasks.filter(task => task.status === 'in_progress').map(task => (
                                 <div key={task.id} className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
-                                        <h4 className='pe-2'>{task.subject}</h4>
+                                        <h5 className='pe-2'>{task.subject}</h5>
                                         <span className='text-muted'>{task.description}</span>
                                     </div>
                                 </div>
                             ))}
                         </div>
                         <div className="col-4 p-3">
-                            <div className='bg-dark rounded text-white text-center mb-3 py-2'>
+                            <div className='rounded text-center mb-3 py-2' style={{backgroundColor: '#B4FFD2'}}>
                                 DONE
                             </div>
                             {tasks.filter(task => task.status === 'done').map(task => (
                                 <div key={task.id} className="task-card card mb-3" onClick={() => handleShowTaskModal(task)}>
                                     <div className=''>
-                                        <h4 className='pe-2'>{task.subject}</h4>
+                                        <h5 className='pe-2'>{task.subject}</h5>
                                         <span className='text-muted'>{task.description}</span>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ import CreateTeamSpaceModal from './CreateTeamSpaceModal';
 
 function Sidebar() {
 
-    const [sidebarActive, setSidebarActive] = useState(false);
+    const [sidebarActive, setSidebarActive] = useState(true);
     const [currentPage, setCurrentPage] = useState(window.location.pathname);
     const [userInfo, setUserInfo] = useState(null);
     const [showCreateTeamspaceModal, setShowCreateTeamspaceModal] = useState(false);
@@ -37,6 +37,22 @@ function Sidebar() {
         };
 
         fetchUserInfo();
+
+        function handleResize() {
+            console.log("Window width:", window.innerWidth);
+            if (window.innerWidth < 855) {
+                console.log("Closing sidebar");
+                setSidebarActive(false);
+            }
+        }
+        
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+
     }, []);
 
 
@@ -65,7 +81,7 @@ function Sidebar() {
     return (
 
         <>
-            <nav id="sidebar" className={sidebarActive ? 'active' : ''}>
+            <nav id="sidebar" className={!sidebarActive ? 'active' : ''}>
 
                 <div className="nav-item rounded card px-2 pointer" onClick={toggleDropdown}>
                     <div className='d-flex align-items-center justify-content-around'>

@@ -13,7 +13,7 @@ export const data = {
   labels: ['Contacts', 'Leads', 'Clients'],
   datasets: [
     {
-      label: '# of Votes',
+      label: '',
       data: [12, 19, 3],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -34,17 +34,17 @@ export const taskCompletionData = {
   labels: ['To Do', 'In Progress', 'Completed'],
   datasets: [
     {
-      label: '% of completed tasks',
-      data: [12, 19],
+      label: '',
+      data: [12, 19, 36],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
+        '#B4EBFF',
+        '#EBFFB4',
+        '#B4FFD2',
       ],
       borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
+        '#246A84',
+        '#98AC60',
+        '#5EAB7D',
       ],
       borderWidth: 1,
     },
@@ -115,6 +115,7 @@ function Dashboard() {
           <div className='row'>
             <div className="col-md-6 p-3">
               <div className='card w-100'>
+                <h5 className='mb-3'>Contact Management</h5>
                 <div className='m-auto' style={{ maxWidth: 400 }}>
                   <Pie data={data} />
                 </div>
@@ -122,6 +123,7 @@ function Dashboard() {
             </div>
             <div className="col-md-6 p-3">
               <div className='card w-100'>
+                <h5 className='mb-3'>Task Management</h5>
                 <div className='m-auto' style={{ maxWidth: 400 }}>
                   <Doughnut data={taskCompletionData} />
                 </div>

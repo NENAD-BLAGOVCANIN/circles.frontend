@@ -89,6 +89,8 @@ function Settings() {
                         ))}
                     </div>
 
+                    <h5 className="bold mt-5">Invite Members</h5>
+
                     <label className='mt-3'>Invite Link:</label>
                     {team && (
                         <input

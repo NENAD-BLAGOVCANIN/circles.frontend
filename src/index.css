@@ -173,6 +173,7 @@ hr {
 #sidebar.active #toggleModalButton {
   left: 0;
   transform: translateX(0%);
+  z-index: 999 !important;
 }
 
 #toggleModalButton {
@@ -189,4 +190,11 @@ hr {
 .task-card:hover{
   background-color: var(--color-gray);
   cursor: pointer;
+}
+
+@media only screen and (max-width: 855px) {
+  #sidebar {
+    position: fixed !important;
+    z-index: 9999 !important;
+  }
 }
