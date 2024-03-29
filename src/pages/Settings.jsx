@@ -3,11 +3,13 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { getTeamInfo, getTeamMembers, updateTeamInfo } from '../api/team'
 import placeholderProfileImage from '../assets/img/profile.svg'
-import { apiUrl } from '../api/config'
+import { apiUrl, frontendUrl } from '../api/config'
+import { getUserInfo } from '../api/user'
 
 function Settings() {
 
     const [team, setTeam] = useState([]);
+    const [user, setUser] = useState([]);
     const [teamMembers, setTeamMembers] = useState([]);
 
     const [name, setName] = useState('');
@@ -30,6 +32,13 @@ function Settings() {
             try {
                 const fetchedTeamMembers = await getTeamMembers();
                 setTeamMembers(fetchedTeamMembers);
+            } catch (error) {
+                console.error('Error fetching :', error);
+            }
+
+            try {
+                const fetchedUserInfo = await getUserInfo();
+                setUser(fetchedUserInfo);
             } catch (error) {
                 console.error('Error fetching :', error);
             }
@@ -85,7 +94,7 @@ function Settings() {
                         <input
                             type="text"
                             className='form-control bg-gray'
-                            value={`${apiUrl}/teams/invite/${team.invite_code}`}
+                            value={`${frontendUrl}/teams/invite/${team.invite_code}/${team.id}`}
                         />
                     )}
                 </div>

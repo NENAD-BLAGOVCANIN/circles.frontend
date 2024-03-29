@@ -10,6 +10,7 @@ import Contacts from './pages/Contacts';
 import Leads from './pages/Leads';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
+import Invite from './pages/Invite';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -47,6 +48,7 @@ function App() {
         <Route path="/register" element={<Register authenticated={authenticated} setAuthenticated={setAuthenticated} />} />
         <Route path="/logout" element={<Logout />} />
 
+        <Route path="/teams/invite/:inviteCode/:teamId" element={<Invite />} />
 
       </Routes>
     </Router>

@@ -1,9 +1,55 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import { getStats } from '../api/dashboard';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie, Doughnut } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export const data = {
+  labels: ['Contacts', 'Leads', 'Clients'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+export const taskCompletionData = {
+  labels: ['To Do', 'In Progress', 'Completed'],
+  datasets: [
+    {
+      label: '% of completed tasks',
+      data: [12, 19],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 
 function Dashboard() {
 
@@ -11,16 +57,16 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchStats = async () => {
-        try {
-            const fetchedStats = await getStats();
-            setStats(fetchedStats);
-        } catch (error) {
-            console.error('Error fetching :', error);
-        }
+      try {
+        const fetchedStats = await getStats();
+        setStats(fetchedStats);
+      } catch (error) {
+        console.error('Error fetching :', error);
+      }
     };
 
     fetchStats();
-}, []);
+  }, []);
 
 
   return (
@@ -29,7 +75,7 @@ function Dashboard() {
       <Sidebar />
 
       <div className='w-100 overflow-auto'>
-        
+
         <Header pageTitle="Dashboard" />
 
         <div className='main-container'>
@@ -63,6 +109,25 @@ function Dashboard() {
                 </div>
               </div>
             </div>
+          </div>
+
+
+          <div className='row'>
+            <div className="col-md-6 p-3">
+              <div className='card w-100'>
+                <div className='m-auto' style={{ maxWidth: 400 }}>
+                  <Pie data={data} />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6 p-3">
+              <div className='card w-100'>
+                <div className='m-auto' style={{ maxWidth: 400 }}>
+                  <Doughnut data={taskCompletionData} />
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
