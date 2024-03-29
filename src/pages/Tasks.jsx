@@ -3,9 +3,9 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { getTasks, saveTask } from '../api/tasks'
 import TaskModal from '../components/TaskModal'
+import { getTeamMembers } from '../api/team';
 
 function Tasks() {
-
 
     const [tasks, setTasks] = useState([]);
     const [selectedTask, setSelectedTask] = useState([]);
@@ -13,8 +13,23 @@ function Tasks() {
     const [showAddTaskCard, setShowAddTaskCard] = useState(false);
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
+    const [teamMembers, setTeamMembers] = useState([]);
 
     useEffect(() => {
+
+        const fetchMembers = async () => {
+
+            try {
+                const fetchedTeamMembers = await getTeamMembers();
+                setTeamMembers(fetchedTeamMembers);
+            } catch (error) {
+                console.error('Error fetching :', error);
+            }
+
+        };
+
+        fetchMembers();
+
         const fetchTasks = async () => {
             try {
                 const fetchedTasks = await getTasks();
@@ -147,6 +162,8 @@ function Tasks() {
                 setSelectedTask={setSelectedTask}
                 tasks={tasks}
                 setTasks={setTasks}
+                teamMembers={teamMembers}
+                setTeamMembers={setTeamMembers}
             />
 
 

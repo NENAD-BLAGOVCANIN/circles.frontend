@@ -3,9 +3,10 @@ import { updateTask } from '../api/tasks';
 import profileImagePlaceholder from '../assets/img/profile.svg'
 import UpdateAssigneeDropdown from './UpdateAssigneeDropdown';
 
-function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks }) {
+function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelectedTask, tasks, setTasks, teamMembers, setTeamMembers }) {
     const [editedTitle, setEditedTitle] = useState(selectedTask.subject);
     const [editedDescription, setEditedDescription] = useState(selectedTask.description);
+
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
 
@@ -114,9 +115,9 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                                 <div className='d-flex align-items-center pt-2'>
                                     <img src={profileImagePlaceholder} className='rounded-circle' alt="" style={{ maxHeight: 35, height: '100%' }} />
                                     <span className='px-2'>{selectedTask.assignee.name}</span>
-                                    <UpdateAssigneeDropdown />
                                 </div>
                             )}
+                            <UpdateAssigneeDropdown teamMembers={teamMembers} />
 
                         </div>
                         <div className='modal-footer border-0'>

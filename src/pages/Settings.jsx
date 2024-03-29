@@ -3,13 +3,11 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { getTeamInfo, getTeamMembers, updateTeamInfo } from '../api/team'
 import placeholderProfileImage from '../assets/img/profile.svg'
-import { apiUrl, frontendUrl } from '../api/config'
-import { getUserInfo } from '../api/user'
+import { frontendUrl } from '../api/config'
 
 function Settings() {
 
     const [team, setTeam] = useState([]);
-    const [user, setUser] = useState([]);
     const [teamMembers, setTeamMembers] = useState([]);
 
     const [name, setName] = useState('');
@@ -32,13 +30,6 @@ function Settings() {
             try {
                 const fetchedTeamMembers = await getTeamMembers();
                 setTeamMembers(fetchedTeamMembers);
-            } catch (error) {
-                console.error('Error fetching :', error);
-            }
-
-            try {
-                const fetchedUserInfo = await getUserInfo();
-                setUser(fetchedUserInfo);
             } catch (error) {
                 console.error('Error fetching :', error);
             }

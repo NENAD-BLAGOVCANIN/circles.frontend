@@ -39,9 +39,7 @@ function Sidebar() {
         fetchUserInfo();
 
         function handleResize() {
-            console.log("Window width:", window.innerWidth);
             if (window.innerWidth < 855) {
-                console.log("Closing sidebar");
                 setSidebarActive(false);
             }
         }
