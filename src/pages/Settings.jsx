@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
-import { getTeamInfo, getTeamMembers } from '../api/team'
+import { getTeamInfo, getTeamMembers, updateTeamInfo } from '../api/team'
 import placeholderProfileImage from '../assets/img/profile.svg'
 
 function Settings() {
@@ -15,8 +15,15 @@ function Settings() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+
                 const fetchedTeamInfo = await getTeamInfo();
                 setTeam(fetchedTeamInfo);
+
+                setTeam((prevTeam) => {
+                    setName(prevTeam.name);
+                    setDescription(prevTeam.description);
+                });
+
             } catch (error) {
                 console.error('Error fetching :', error);
             }
@@ -32,6 +39,11 @@ function Settings() {
 
         fetchData();
     }, []);
+
+    const handleUpdateChanges = async () => {
+        await updateTeamInfo(name, description);
+        window.location.reload();
+    }
 
     return (
         <div className='main-content-wrapper'>
@@ -56,13 +68,13 @@ function Settings() {
                         placeholder='Teamspace description' value={description} autoComplete="new-password"
                         onChange={(e) => setDescription(e.target.value)} />
 
-                    <button className='btn btn-primary rounded mt-3'>Save Changes</button>
+                    <button className='btn btn-primary rounded mt-3' onClick={handleUpdateChanges}>Save Changes</button>
 
                     <h5 className="bold mt-5">Teamspace Members</h5>
                     <div className='row align-items-center w-100'>
 
                         {teamMembers.map(teamMember => (
-                            <div className='col-md-2 d-flex flex-column align-items-center pt-3 pe-2 w-fit'>
+                            <div className='col-md-2 d-flex flex-column align-items-center pt-3 pe-2 w-fit' key={teamMember.id} >
                                 <img src={placeholderProfileImage} className='img-fluid rounded-circle' style={{ maxWidth: 55 }} alt="" />
                                 <span className='small'>{teamMember.user.name.length > 10 ? teamMember.user.name.substring(0, 10) + '...' : teamMember.user.name}</span>
                             </div>

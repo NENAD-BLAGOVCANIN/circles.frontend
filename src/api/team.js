@@ -145,4 +145,36 @@ const saveTeam = async (name, description) => {
 
 }
 
-export { getTeamMembers, getMyTeams, saveTeam, getTeamInfo, switchTeam }
+
+const updateTeamInfo = async (name, description) => {
+
+    try {
+
+        const token = localStorage.getItem('accessToken');
+
+        const data = {
+            "name": name,
+            "description": description
+        }
+
+        const response = await fetch(apiUrl + '/team', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+export { getTeamMembers, getMyTeams, saveTeam, getTeamInfo, switchTeam, updateTeamInfo }
