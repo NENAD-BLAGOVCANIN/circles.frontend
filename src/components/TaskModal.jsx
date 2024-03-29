@@ -110,14 +110,18 @@ function TaskModal({ showTasksModal, setShowTasksModal, selectedTask, setSelecte
                             <p className='text-muted' onBlur={handleBlur}>
                                 <span ref={descriptionRef} contentEditable suppressContentEditableWarning onBlur={handleBlur} onInput={handleDescriptionChange} dir="ltr">{editedDescription}</span>
                             </p>
-                            <h5 className='mt-5'>Assignee</h5>
+
+                            <div className='d-flex align-items-center mt-5'>
+                                <h5 className='mb-0 pe-3'>Assignee</h5>
+                                <UpdateAssigneeDropdown teamMembers={teamMembers} selectedTask={selectedTask} setSelectedTask={setSelectedTask} tasks={tasks} setTasks={setTasks} />
+                            </div>
+
                             {selectedTask.assignee && (
-                                <div className='d-flex align-items-center pt-2'>
+                                <div className='d-flex align-items-center pt-3'>
                                     <img src={profileImagePlaceholder} className='rounded-circle' alt="" style={{ maxHeight: 35, height: '100%' }} />
                                     <span className='px-2'>{selectedTask.assignee.name}</span>
                                 </div>
                             )}
-                            <UpdateAssigneeDropdown teamMembers={teamMembers} selectedTask={selectedTask} setSelectedTask={setSelectedTask} tasks={tasks} setTasks={setTasks} />
 
                         </div>
                         <div className='modal-footer border-0'>
