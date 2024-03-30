@@ -60,6 +60,8 @@ function Tasks() {
             const newTask = await saveTask(subject, description);
             setTasks([newTask, ...tasks]);
             setShowAddTaskCard(false);
+            setSubject('');
+            setDescription('');
         } catch {
 
         }
