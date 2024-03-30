@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { saveContact } from '../api/contacts';
+import React, { useState, useEffect } from 'react';
+import { updateContact } from '../api/contacts';
 
 function EditContactModal({ contacts, setContacts, showEditContactsModal, setShowEditContactsModal, selectedContact, setSelectedContact }) {
     const [name, setName] = useState('');
@@ -12,12 +12,26 @@ function EditContactModal({ contacts, setContacts, showEditContactsModal, setSho
     const [pastClient, setPastClient] = useState(false);
     const [errors, setErrors] = useState([]);
 
+    useEffect(() => {
+        if (selectedContact) {
+            setName(selectedContact.name || '');
+            setEmail(selectedContact.email || '');
+            setTitle(selectedContact.title || '');
+            setCity(selectedContact.city || '');
+            setAddress(selectedContact.address || '');
+            setOrganization(selectedContact.organization || '');
+            setDescription(selectedContact.description || '');
+            setPastClient(selectedContact.pastClient || false);
+        }
+    }, [selectedContact]);
+
     const handleCloseEditContactsModal = () => {
         setShowEditContactsModal(false);
     };
 
     const handleSubmit = async () => {
         const contact = {
+            "id": selectedContact.id,
             "name": name,
             "email": email,
             "title": title,
@@ -29,8 +43,14 @@ function EditContactModal({ contacts, setContacts, showEditContactsModal, setSho
         };
 
         try {
-            const newContact = await saveContact(contact);
-            setContacts([newContact, ...contacts]);
+            const updatedContact = await updateContact(contact);
+            setSelectedContact(updatedContact);
+
+            const updatedContacts = contacts.map(contact =>
+                contact.id === updatedContact.id ? updatedContact : contact
+            );
+            setContacts(updatedContacts);
+
             setShowEditContactsModal(false);
         } catch (error) {
             setErrors(error.message);
@@ -91,7 +111,7 @@ function EditContactModal({ contacts, setContacts, showEditContactsModal, setSho
                             </div>
                         </div>
                         <div className='modal-footer border-0'>
-                            <button className='btn btn-primary rounded' onClick={handleSubmit}>Save</button>
+                            <button className='btn btn-primary rounded' onClick={handleSubmit}>Save Changes</button>
                         </div>
                     </div>
                 </div>
