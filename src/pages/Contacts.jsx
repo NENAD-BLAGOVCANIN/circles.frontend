@@ -5,13 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash, faBars, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { getContacts } from '../api/contacts';
 import AddContactModal from '../components/AddContactModal';
+import EditContactModal from '../components/EditContactModal';
 import { deleteContact } from '../api/contacts';
 import ViewContactModal from '../components/ViewContactModal';
 
-function Contacts({contacts, setContacts, leads, setLeads}) {
+function Contacts({ contacts, setContacts, leads, setLeads }) {
 
     const [selectedContact, setSelectedContact] = useState([]);
     const [showAddContactsModal, setShowAddContactsModal] = useState(false);
+    const [showEditContactsModal, setShowEditContactsModal] = useState(false);
     const [showViewContactModal, setShowViewContactModal] = useState(false);
 
     useEffect(() => {
@@ -45,6 +47,12 @@ function Contacts({contacts, setContacts, leads, setLeads}) {
         setSelectedContact(contact);
         setShowViewContactModal(true);
     };
+
+    
+    const openEditContactModal = (contact) => {
+        setShowEditContactsModal(true);
+        setSelectedContact(contact);
+    }
 
 
     return (
@@ -97,7 +105,7 @@ function Contacts({contacts, setContacts, leads, setLeads}) {
                                                         </button>
                                                     </div>
                                                     <div className='px-1'>
-                                                        <button className='btn btn-basic bg-gray shadow-sm' onClick={() => handleDeleteContact(contact.id)}>
+                                                        <button className='btn btn-basic bg-gray shadow-sm' onClick={() => openEditContactModal(contact)}>
                                                             <FontAwesomeIcon icon={faEdit} />
                                                         </button>
                                                     </div>
@@ -124,6 +132,15 @@ function Contacts({contacts, setContacts, leads, setLeads}) {
                 setContacts={setContacts}
                 showAddContactsModal={showAddContactsModal}
                 setShowAddContactsModal={setShowAddContactsModal}
+            />
+
+            <EditContactModal
+                contacts={contacts}
+                setContacts={setContacts}
+                selectedContact={selectedContact}
+                setSelectedContact={setSelectedContact}
+                showEditContactsModal={showEditContactsModal}
+                setShowEditContactsModal={setShowEditContactsModal}
             />
 
             <ViewContactModal
