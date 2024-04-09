@@ -7,7 +7,7 @@ import { getLeads } from '../api/leads';
 import { deleteLead } from '../api/leads';
 import AddLeadModal from '../components/AddLeadModal';
 
-function Leads({ leads, setLeads }) {
+function Leads({ leads, setLeads, contacts, setContacts }) {
 
     const [showAddLeadModal, setShowAddLeadModal] = useState(false);
 
@@ -112,6 +112,8 @@ function Leads({ leads, setLeads }) {
                 setLeads={setLeads}
                 showAddLeadModal={showAddLeadModal}
                 setShowAddLeadModal={setShowAddLeadModal}
+                contacts={contacts}
+                setContacts={setContacts}
             />
         </>
 
